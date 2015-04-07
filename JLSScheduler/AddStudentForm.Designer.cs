@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddStudentForm));
             this.CancelButton = new System.Windows.Forms.Button();
-            this.AddedName = new System.Windows.Forms.TextBox();
+            this.EnglishName = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.KoreanName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CancelButton
@@ -45,14 +45,15 @@
             this.CancelButton.TabIndex = 6;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // AddedName
+            // EnglishName
             // 
-            this.AddedName.Location = new System.Drawing.Point(93, 6);
-            this.AddedName.Name = "AddedName";
-            this.AddedName.Size = new System.Drawing.Size(166, 20);
-            this.AddedName.TabIndex = 5;
-            this.AddedName.Text = "Student";
+            this.EnglishName.Location = new System.Drawing.Point(93, 6);
+            this.EnglishName.Name = "EnglishName";
+            this.EnglishName.Size = new System.Drawing.Size(166, 20);
+            this.EnglishName.TabIndex = 5;
+            this.EnglishName.Text = "Student";
             // 
             // AddButton
             // 
@@ -62,6 +63,7 @@
             this.AddButton.TabIndex = 4;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // label1
             // 
@@ -81,27 +83,26 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Korean Name";
             // 
-            // textBox1
+            // KoreanName
             // 
-            this.textBox1.Location = new System.Drawing.Point(93, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(166, 20);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "학생";
+            this.KoreanName.Location = new System.Drawing.Point(93, 36);
+            this.KoreanName.Name = "KoreanName";
+            this.KoreanName.Size = new System.Drawing.Size(166, 20);
+            this.KoreanName.TabIndex = 8;
+            this.KoreanName.Text = "학생";
             // 
             // AddStudentForm
             // 
             this.AcceptButton = this.AddButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(267, 114);
             this.ControlBox = false;
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.KoreanName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CancelButton);
-            this.Controls.Add(this.AddedName);
+            this.Controls.Add(this.EnglishName);
             this.Controls.Add(this.AddButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddStudentForm";
@@ -116,10 +117,10 @@
         #endregion
 
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.TextBox AddedName;
-        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Button AddButton;
+        public System.Windows.Forms.TextBox EnglishName;
+        public System.Windows.Forms.TextBox KoreanName;
     }
 }

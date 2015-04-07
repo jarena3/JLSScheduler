@@ -1,0 +1,16 @@
+[
+    "DSC",
+    "DSD",
+    "LSA-1",
+    "LSA-2",
+    "LSB-1",
+    "LSB-2",
+    "LSC-1",
+    "LSC-2",
+    "LSD-1",
+    "LSD-2",
+    "MSA1",
+    "MSA-2",
+    "MSB-1",
+    "MSB2"
+]

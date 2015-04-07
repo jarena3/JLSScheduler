@@ -1,0 +1,106 @@
+[
+    {
+        "Title": "LSA-1",
+        "Units": {
+            "1": "Facts about Sloths",
+            "2": "Gladiators",
+            "3": "Meet Joey",
+            "4": "Your ID, Please!",
+            "5": "Don't Bite Me!",
+            "6": "Get the Ball Rolling",
+            "7": "Why Do We Sleep?",
+            "8": "Saving Energy"
+        }
+    },
+    {
+        "Title": "LSA-2",
+        "Units": {
+            "1": "Pyramids",
+            "2": "Moko to the Rescue",
+            "3": "Which is Colder?",
+            "4": "Reading Dots",
+            "5": "Wasps and Bees",
+            "6": "You Can Be a Potato Farmer",
+            "7": "Grand Canyon",
+            "8": "A New Life for Trash"
+        }
+    },
+    {
+        "Title": "LSB-1",
+        "Units": {
+            "1": "Sweet Midas",
+            "2": "Mayonnaise By Accident",
+            "3": "Inside a Mommy's Tummy",
+            "4": "Living in Space",
+            "5": "Don't Kill Spiders!",
+            "6": "Dog Attack",
+            "7": "Black Polar Bears",
+            "8": "Tiny but Dangerous"
+        }
+    },
+    {
+        "Title": "LSB-2",
+        "Units": {
+            "1": "Coral Reefs",
+            "2": "The Bermuda Triangle",
+            "3": "Life is Everywhere",
+            "4": "The Little Black Lady Who Said No",
+            "5": "Racing Cheese",
+            "6": "Chameleon Rock",
+            "7": "Gloves for Ears",
+            "8": "The Fingers of God"
+        }
+    },
+    {
+        "Title": "LSC-1",
+        "Units": {
+            "1": "The Subway Superman",
+            "2": "The First Fireworks",
+            "3": "Tasty Mistakes",
+            "4": "Kid Writers",
+            "5": "The King of Colors",
+            "6": "The Origin of Numbers",
+            "7": "Monsters in Stories",
+            "8": "Boxing Day"
+        }
+    },
+    {
+        "Title": "LSC-2",
+        "Units": {
+            "1": "The Hungry Blue Whale",
+            "2": "Money in Ancient Times",
+            "3": "Colored Vegetables",
+            "4": "The True Story of Dracula",
+            "5": "Soap Box Derby",
+            "6": "Dragons: East and West",
+            "7": "Chocolate Celebration",
+            "8": "The Use of Masks"
+        }
+    },
+    {
+        "Title": "LSD-1",
+        "Units": {
+            "1": "Disappearing Honeybees",
+            "2": "The Voice of the Mona Lisa",
+            "3": "Making a TV Commercial",
+            "4": "Container? Corntainer?",
+            "5": "The Power of Music",
+            "6": "Science of Crying",
+            "7": "The Siesta",
+            "8": "The History of Pizza"
+        }
+    },
+    {
+        "Title": "LSD-2",
+        "Units": {
+            "1": "Early Traffic Lights",
+            "2": "The Vegetable Orchestra",
+            "3": "Polyglots in the World",
+            "4": "The Leaning Tower of Pisa",
+            "5": "Magic and Magician",
+            "6": "The Story of Ice Cream",
+            "7": "The Meaning of Games",
+            "8": "The Eiffel Tower"
+        }
+    }
+]
