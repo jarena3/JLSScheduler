@@ -29,6 +29,8 @@ namespace JLSScheduler
         public int weeklyReadingCount;
         public bool weeklyListening;
         public int weeklyListeningCount;
+        public bool weeklyRecitation;
+        public int weeklyRecitationCount;
         public bool weeklyCustom;
         public int weeklyCustomCount;
         public string weeklyCustomText;
