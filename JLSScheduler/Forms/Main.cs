@@ -22,9 +22,8 @@ namespace JLSScheduler
         public Main()
         {
             InitializeComponent();
-            ScheduleBuilder s = new ScheduleBuilder();
             //deserialize the book lists for later use
-            s.Init();
+            ScheduleBuilder.Init();
         }
 
         private void MainLoad(object sender, EventArgs e)
@@ -274,17 +273,75 @@ namespace JLSScheduler
 
         private void GenerateSchedule()
         {
-            var outputBox = SyllabusPreviewBox.Text;
+            var outputBox = string.Empty;
+            var nl = Environment.NewLine + "----------" + Environment.NewLine;
+
+            if (DateCheck())
+            {
+                outputBox += "Schedule Generation Complete." + Environment.NewLine +
+                             "This is a preview of the class schedule. Please review this to ensure the homework tasks and holiday exceptions are correct." + Environment.NewLine +
+                             "Then, press [Export] to generate A folder containing formatted, printable handouts.";
+                outputBox += nl;
+                outputBox += "";
+                outputBox += "NT: " + LoadedClassData.NTname + "   |    KT: " + LoadedClassData.KTname + Environment.NewLine;
+                outputBox += "Semester starts on: " + LoadedClassData.semesterStart.ToLongDateString() + Environment.NewLine;
+                outputBox += "Semester ends on: " + LoadedClassData.semesterEnd.ToLongDateString() + Environment.NewLine;
+                outputBox += "Students: " + LoadedClassData.studentList.Count + Environment.NewLine;
+                foreach (var s in LoadedClassData.studentList)
+                {
+                    if (s.Item2 != null)
+                    {
+                        outputBox += string.Format("{0} ({1}), ", s.Item1, s.Item2);
+                    }
+                    else
+                    {
+                        outputBox += s.Item1 + ", ";
+                    }
+                }
+                outputBox += nl;
+
+                
+                var hw = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData);
+
+
+            }
+            SyllabusPreviewBox.Text = outputBox;
         }
 
         private void AddHomeworkButton_Click(object sender, EventArgs e)
         {
+            StoreClassData();
             using (CustomHomeworkForm chf = new CustomHomeworkForm(this))
             {
                 chf.ShowDialog();
             }
         }
 
+        private void AddHolidayButton_Click(object sender, EventArgs e)
+        {
+            StoreClassData();
+            if (DateCheck())
+            {
+                using (CustomHolidayForm hf = new CustomHolidayForm(this))
+                {
+                    hf.ShowDialog();
+                }
+            }
+        }
+
+        private bool DateCheck()
+        {
+            if (LoadedClassData.semesterStart >= LoadedClassData.semesterEnd)
+            {
+                MessageBox.Show("The semester starting date cannot be the same as, or later than, the semester end date.\n Please fix this before proceeding.",
+                                "ERROR",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Exclamation,
+                                MessageBoxDefaultButton.Button1);
+                return false;
+            }
+            return true;
+        }
 
 
     }

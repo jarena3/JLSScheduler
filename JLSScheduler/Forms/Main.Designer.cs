@@ -521,30 +521,70 @@
             // WeeklyCustomCT
             // 
             this.WeeklyCustomCT.Location = new System.Drawing.Point(126, 85);
+            this.WeeklyCustomCT.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WeeklyCustomCT.Name = "WeeklyCustomCT";
             this.WeeklyCustomCT.Size = new System.Drawing.Size(38, 20);
             this.WeeklyCustomCT.TabIndex = 8;
+            this.WeeklyCustomCT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // WeeklyRecitationCT
             // 
             this.WeeklyRecitationCT.Location = new System.Drawing.Point(126, 62);
+            this.WeeklyRecitationCT.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WeeklyRecitationCT.Name = "WeeklyRecitationCT";
             this.WeeklyRecitationCT.Size = new System.Drawing.Size(38, 20);
             this.WeeklyRecitationCT.TabIndex = 7;
+            this.WeeklyRecitationCT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // WeeklyListeningCT
             // 
             this.WeeklyListeningCT.Location = new System.Drawing.Point(126, 39);
+            this.WeeklyListeningCT.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WeeklyListeningCT.Name = "WeeklyListeningCT";
             this.WeeklyListeningCT.Size = new System.Drawing.Size(38, 20);
             this.WeeklyListeningCT.TabIndex = 6;
+            this.WeeklyListeningCT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // WeeklyReadingCT
             // 
             this.WeeklyReadingCT.Location = new System.Drawing.Point(126, 16);
+            this.WeeklyReadingCT.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WeeklyReadingCT.Name = "WeeklyReadingCT";
             this.WeeklyReadingCT.Size = new System.Drawing.Size(38, 20);
             this.WeeklyReadingCT.TabIndex = 5;
+            this.WeeklyReadingCT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // WeeklyCustomCB
             // 
@@ -607,12 +647,12 @@
             // GenerateButton
             // 
             this.GenerateButton.BackColor = System.Drawing.SystemColors.Control;
-            this.GenerateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GenerateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GenerateButton.Location = new System.Drawing.Point(446, 30);
             this.GenerateButton.Name = "GenerateButton";
             this.GenerateButton.Size = new System.Drawing.Size(164, 36);
             this.GenerateButton.TabIndex = 17;
-            this.GenerateButton.Text = "Generate Schedule";
+            this.GenerateButton.Text = "Preview Schedule";
             this.GenerateButton.UseVisualStyleBackColor = false;
             this.GenerateButton.Click += new System.EventHandler(this.GenerateButton_Click);
             // 
@@ -666,6 +706,7 @@
             this.AddHolidayButton.TabIndex = 23;
             this.AddHolidayButton.Text = "Edit Custom Holidays";
             this.AddHolidayButton.UseVisualStyleBackColor = true;
+            this.AddHolidayButton.Click += new System.EventHandler(this.AddHolidayButton_Click);
             // 
             // label2
             // 

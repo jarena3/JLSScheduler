@@ -28,52 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomHomeworkForm));
             this.TasksList = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.AddNewBTN = new System.Windows.Forms.Button();
+            this.DeleteBTN = new System.Windows.Forms.Button();
             this.OkBTN = new System.Windows.Forms.Button();
             this.TitleTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.DescriptionTB = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.RepeatsCB = new System.Windows.Forms.CheckBox();
+            this.RepeatsCT = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.WeekNumberCT = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.SaveBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.RepeatsCT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WeekNumberCT)).BeginInit();
             this.SuspendLayout();
             // 
             // TasksList
             // 
             this.TasksList.FormattingEnabled = true;
-            this.TasksList.Location = new System.Drawing.Point(530, 12);
+            this.TasksList.Location = new System.Drawing.Point(530, 29);
             this.TasksList.Name = "TasksList";
-            this.TasksList.Size = new System.Drawing.Size(251, 251);
+            this.TasksList.Size = new System.Drawing.Size(251, 225);
             this.TasksList.TabIndex = 0;
             this.TasksList.SelectedIndexChanged += new System.EventHandler(this.TasksList_SelectedIndexChanged);
             // 
-            // button1
+            // AddNewBTN
             // 
-            this.button1.Location = new System.Drawing.Point(449, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add New";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddNewBTN.Location = new System.Drawing.Point(449, 25);
+            this.AddNewBTN.Name = "AddNewBTN";
+            this.AddNewBTN.Size = new System.Drawing.Size(75, 23);
+            this.AddNewBTN.TabIndex = 1;
+            this.AddNewBTN.Text = "Add New";
+            this.AddNewBTN.UseVisualStyleBackColor = true;
+            this.AddNewBTN.Click += new System.EventHandler(this.AddNewBTN_Click);
             // 
-            // button2
+            // DeleteBTN
             // 
-            this.button2.Location = new System.Drawing.Point(449, 42);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
+            this.DeleteBTN.Location = new System.Drawing.Point(449, 54);
+            this.DeleteBTN.Name = "DeleteBTN";
+            this.DeleteBTN.Size = new System.Drawing.Size(75, 23);
+            this.DeleteBTN.TabIndex = 2;
+            this.DeleteBTN.Text = "Delete";
+            this.DeleteBTN.UseVisualStyleBackColor = true;
+            this.DeleteBTN.Click += new System.EventHandler(this.DeleteBTN_Click);
             // 
             // OkBTN
             // 
-            this.OkBTN.Location = new System.Drawing.Point(668, 274);
+            this.OkBTN.Location = new System.Drawing.Point(668, 260);
             this.OkBTN.Name = "OkBTN";
             this.OkBTN.Size = new System.Drawing.Size(112, 38);
             this.OkBTN.TabIndex = 3;
@@ -114,84 +119,118 @@
             this.DescriptionTB.Size = new System.Drawing.Size(394, 172);
             this.DescriptionTB.TabIndex = 6;
             // 
-            // checkBox1
+            // RepeatsCB
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(211, 288);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Repeats every";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.RepeatsCB.AutoSize = true;
+            this.RepeatsCB.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.RepeatsCB.Location = new System.Drawing.Point(12, 286);
+            this.RepeatsCB.Name = "RepeatsCB";
+            this.RepeatsCB.Size = new System.Drawing.Size(195, 17);
+            this.RepeatsCB.TabIndex = 8;
+            this.RepeatsCB.Text = "Repeats every                       weeks";
+            this.RepeatsCB.UseVisualStyleBackColor = true;
+            this.RepeatsCB.CheckedChanged += new System.EventHandler(this.RepeatsCB_CheckedChanged);
             // 
-            // numericUpDown1
+            // RepeatsCT
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(303, 285);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.RepeatsCT.Location = new System.Drawing.Point(104, 283);
+            this.RepeatsCT.Maximum = new decimal(new int[] {
             4,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.RepeatsCT.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(56, 20);
-            this.numericUpDown1.TabIndex = 9;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.RepeatsCT.Name = "RepeatsCT";
+            this.RepeatsCT.Size = new System.Drawing.Size(56, 20);
+            this.RepeatsCT.TabIndex = 9;
+            this.RepeatsCT.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(365, 289);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "weeks.";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(206, 258);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 11;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(155, 264);
+            this.label4.Location = new System.Drawing.Point(13, 260);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Due on:";
+            this.label4.Text = "Due on week #:";
+            // 
+            // WeekNumberCT
+            // 
+            this.WeekNumberCT.Location = new System.Drawing.Point(104, 258);
+            this.WeekNumberCT.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.WeekNumberCT.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.WeekNumberCT.Name = "WeekNumberCT";
+            this.WeekNumberCT.Size = new System.Drawing.Size(56, 20);
+            this.WeekNumberCT.TabIndex = 13;
+            this.WeekNumberCT.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(527, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Custom Homework Tasks:";
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.Enabled = false;
+            this.SaveBtn.Location = new System.Drawing.Point(274, 258);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(132, 38);
+            this.SaveBtn.TabIndex = 15;
+            this.SaveBtn.Text = "Save";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // CustomHomeworkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 328);
+            this.ClientSize = new System.Drawing.Size(792, 310);
+            this.Controls.Add(this.SaveBtn);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.WeekNumberCT);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.RepeatsCT);
+            this.Controls.Add(this.RepeatsCB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.DescriptionTB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TitleTB);
             this.Controls.Add(this.OkBTN);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DeleteBTN);
+            this.Controls.Add(this.AddNewBTN);
             this.Controls.Add(this.TasksList);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CustomHomeworkForm";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Add Custom Homework Task";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RepeatsCT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WeekNumberCT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,17 +239,18 @@
         #endregion
 
         private System.Windows.Forms.ListBox TasksList;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button AddNewBTN;
+        private System.Windows.Forms.Button DeleteBTN;
         private System.Windows.Forms.Button OkBTN;
         private System.Windows.Forms.TextBox TitleTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox DescriptionTB;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.CheckBox RepeatsCB;
+        private System.Windows.Forms.NumericUpDown RepeatsCT;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown WeekNumberCT;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button SaveBtn;
     }
 }
