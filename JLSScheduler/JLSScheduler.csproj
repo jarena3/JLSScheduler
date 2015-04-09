@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="Book.cs" />
     <Compile Include="ClassData.cs" />
+    <Compile Include="Forms\CustomHolidayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomHolidayForm.Designer.cs">
+      <DependentUpon>CustomHolidayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CustomHomeworkForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomHolidayForm.resx">
+      <DependentUpon>CustomHolidayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomHomeworkForm.resx">
       <DependentUpon>CustomHomeworkForm.cs</DependentUpon>
