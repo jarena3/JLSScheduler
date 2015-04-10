@@ -1,22 +1,20 @@
-﻿using System;
-
-namespace JLSScheduler
+﻿namespace JLSScheduler
 {
     public class HomeworkTask
     {
-        public int DueWeek;
-        public string Title;
         public string Body;
-        public bool Repeats;
+        public int DueWeek;
         public int RepeatEvery;
+        public bool Repeats;
+        public string Title;
 
-        public HomeworkTask(string title, int week)
+        public HomeworkTask(string title, string body, int week)
         {
-            this.Title = title;
-            this.DueWeek = week;
-            this.Body = string.Empty;
-            this.Repeats = false;
-            this.RepeatEvery = 1;
+            Title = title;
+            DueWeek = week;
+            Body = body;
+            Repeats = false;
+            RepeatEvery = 1;
         }
 
 
@@ -24,6 +22,5 @@ namespace JLSScheduler
         {
             return Title + ", due week " + DueWeek;
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace JLSScheduler.Forms
     public partial class CustomHolidayForm : Form
     {
         private Main main;
-        private List<DateTime> customHolidays; 
+        private Dictionary<DateTime, string> customHolidays; 
 
         public CustomHolidayForm(Main m)
         {
@@ -59,13 +59,13 @@ namespace JLSScheduler.Forms
         {
             var selection = Calendar.SelectionStart;
 
-            if (customHolidays.Contains(selection))
+            if (customHolidays.Keys.Contains(selection))
             {
                 customHolidays.Remove(selection);
             }
             else if (!ScheduleBuilder.Holidays.Keys.Contains(selection))
             {
-                customHolidays.Add(selection);
+                customHolidays.Add(selection, "No Class");
             }
             UpdateCustomHolidayListBox();
         }
@@ -73,7 +73,7 @@ namespace JLSScheduler.Forms
         private void UpdateCustomHolidayListBox()
         {
             CustomHolidaysListBox.Items.Clear();
-            string[] s = customHolidays.Select(a => a.ToShortDateString()).ToArray();
+            string[] s = customHolidays.Keys.Select(a => a.ToShortDateString()).ToArray();
 
             CustomHolidaysListBox.Items.AddRange(s);
             MarkAllBold();
@@ -81,7 +81,7 @@ namespace JLSScheduler.Forms
 
         private void MarkAllBold()
         {
-            var allDates = ScheduleBuilder.Holidays.Keys.Concat(customHolidays).ToArray();
+            var allDates = ScheduleBuilder.Holidays.Keys.Concat(customHolidays.Keys).ToArray();
             Calendar.BoldedDates = allDates;
         }
 

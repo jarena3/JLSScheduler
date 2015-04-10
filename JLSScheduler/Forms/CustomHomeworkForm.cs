@@ -57,7 +57,7 @@ namespace JLSScheduler.Forms
 
         private void AddNewBTN_Click(object sender, EventArgs e)
         {
-            tasks.Add(new HomeworkTask("New Homework Task", 1));
+            tasks.Add(new HomeworkTask("New Homework Task", string.Empty, 1));
             TextBoxesClear();
             RefreshTasksList();
         }

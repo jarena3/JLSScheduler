@@ -38,7 +38,7 @@ namespace JLSScheduler
 
             //create new lists for custom homework and holidays
             LoadedClassData.customHomeworkList = new List<HomeworkTask>();
-            LoadedClassData.customHolidaysList = new List<DateTime>();
+            LoadedClassData.customHolidaysList = new Dictionary<DateTime, string>();
 
         }
 
@@ -60,6 +60,7 @@ namespace JLSScheduler
             ClassTimeComboBox.SelectedIndex = 0;
             LoadedClassData.classTimeIndex = 0;
             LoadedClassData.classDayIndex = ClassDayComboBox.SelectedIndex;
+            LoadedClassData.classTimeString = ClassTimeComboBox.SelectedText;
         }
         #endregion
 
@@ -261,6 +262,7 @@ namespace JLSScheduler
             LoadedClassData.secondPresentationCustomReq = SecondPresentationCustomReqCB.Checked;
             LoadedClassData.secondPresentationCustomText = SecondPresentationCustomReqTB.Text;
             LoadedClassData.endOfSemesterReviewDays = ReviewCB.Checked;
+            LoadedClassData.classTimeString = ClassTimeComboBox.Items[LoadedClassData.classTimeIndex].ToString();
         }
 
 
@@ -300,9 +302,7 @@ namespace JLSScheduler
                 }
                 outputBox += nl;
 
-                
-                var hw = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData);
-
+                outputBox = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData).Aggregate(outputBox, (current, s) => current + s);
 
             }
             SyllabusPreviewBox.Text = outputBox;
