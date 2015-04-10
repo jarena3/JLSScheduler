@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace JLSScheduler
 {
@@ -12,61 +13,75 @@ namespace JLSScheduler
     /// </summary>
     class Week
     {
-        public Week(DateTime date, string time, string LSclass, Dictionary<int, string>LSBook, int weekNumber)
+        /// <summary>
+        /// Not a holiday. Not a presentation week.
+        /// </summary>
+        public Week(int weekNumber, DateTime date, Book LSBook)
         {
-            this._homeworkList = new List<string>();
-            this._date = date;
-            this._time = time;
+            this.HomeworkList = new List<HomeworkTask>();
+            this.DateTime = date;
             this._book = LSBook;
-            this._lsClass = LSclass;
             this._weekNumber = weekNumber;
         }
-        
-        
-        private DateTime _date;
-        private string _time;
-        private Dictionary<int, string> _book; 
 
-        private List<string> _homeworkList;
+        /// <summary>
+        /// A holiday
+        /// </summary>
+        public Week(DateTime date, string holidayName)
+        {
+            this.DateTime = date;
+            this.HomeworkList = new List<HomeworkTask>();
+            this.IsHoliday = true;
+            this._holidayName = holidayName;
+        }
+
+        /// <summary>
+        /// A presentation week
+        /// </summary>
+        public Week(DateTime date, bool firstPresentation)
+        {
+            this.DateTime = date;
+            this.HomeworkList = new List<HomeworkTask>();
+            PresentationNumber = firstPresentation ? 1 : 2;
+
+        }
+          
+        public DateTime DateTime;
+        private Book _book;
+        public bool IsHoliday;
+
+        public int PresentationNumber;
+
+        public int WeekNumber { get { return _weekNumber; } }
+
+        public List<HomeworkTask> HomeworkList;
         private int _weekNumber;
         private string _lsClass;
 
-        public string Date { get { return _date.ToString("U"); } }
-        public string Time { get { return _time; } }
+        public string Date { get { return DateTime.ToString("D"); } }
 
+        private string _holidayName;
 
-        public string Title
-        {
-            get { return string.Format("{0} - {1}", this.Date, this.Time); }
-        }
-
-        public string Subtitle
-        {
-            get { return string.Format("Speaking Tree {0}, Unit {1}", _lsClass, _book[_weekNumber]);}
-        }
-
-        public string Homework
+        public string HolidayTitle
         {
             get
             {
-                if (_homeworkList.Count > 0)
+                if (!string.IsNullOrEmpty(_holidayName))
                 {
-                    string hw = string.Empty;
-                    foreach (string s in _homeworkList)
-                    {
-                        hw += "+ " + s;
-                    }
-                    return hw;
+                    return _holidayName;
                 }
 
-                return "No homework this week.";
-
+                return "No Class";
             }
         }
 
-        public void AddHomework(string homeworkItem)
+        public string Title;
+
+        public string Subtitle;
+
+        public void AddHomework(HomeworkTask homeworkItem)
         {
-            _homeworkList.Add(homeworkItem);
+            HomeworkList.Add(homeworkItem);
         }
 
     }

@@ -30,19 +30,7 @@ namespace JLSScheduler
         {
             return JsonConvert.DeserializeObject<string[]>(Properties.Resources.TRTimes);
         }
+
     }
 
-    public static class LSBooks
-    {
-        //import these from external data
-
-        public static Dictionary<int, string> LSA1;
-        public static Dictionary<int, string> LSA2;
-        public static Dictionary<int, string> LSB1;
-        public static Dictionary<int, string> LSB2;
-        public static Dictionary<int, string> LSC1;
-        public static Dictionary<int, string> LSC2;
-        public static Dictionary<int, string> LSD1;
-        public static Dictionary<int, string> LSD2;
-        }
 }

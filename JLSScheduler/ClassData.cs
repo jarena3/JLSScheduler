@@ -48,13 +48,14 @@ namespace JLSScheduler
         public bool endOfSemesterReviewDays;
 
         public List<HomeworkTask> customHomeworkList;
-        public List<DateTime> customHolidaysList;
+        public Dictionary<DateTime, string> customHolidaysList;
+        public string classTimeString;
 
         public ClassData()
         {
             studentList = new List<Tuple<string, string>>();
             customHomeworkList = new List<HomeworkTask>();
-            customHolidaysList = new List<DateTime>();
+            customHolidaysList = new Dictionary<DateTime, string>();
             semesterStart = DateTime.Now;
             semesterEnd = DateTime.Now.AddDays(1);
         }
