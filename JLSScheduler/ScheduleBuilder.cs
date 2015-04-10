@@ -47,7 +47,7 @@ namespace JLSScheduler
 
             foreach (Week w in weeks)
             {
-               output.Add(w.Title + Environment.NewLine + w.Subtitle);
+               output.Add(w.ToString());
             }
 
 
@@ -207,14 +207,7 @@ namespace JLSScheduler
 
                             chapterIterator++;
 
-                            //check the custom homework list, and add any applicable ones to the homework list
-                            foreach (HomeworkTask hw in cd.customHomeworkList)
-                            {
-                                foreach (Week wk in weeks.Where(wk => hw.DueWeek == wk.WeekNumber))
-                                {
-                                    wk.AddHomework(hw);
-                                }
-                            }
+
 
                         }
                     }
@@ -225,6 +218,16 @@ namespace JLSScheduler
                         if (cd.endOfSemesterReviewDays)
                         {
                             w.Subtitle = "Review Day";
+                        }
+                    }
+
+                    //check the custom homework list, and add any applicable ones to the homework list
+                    foreach (HomeworkTask hw in cd.customHomeworkList)
+                    {
+                        //TODO: these need to be able to repeat
+                        foreach (Week wk in weeks.Where(wk => hw.DueWeek == wk.WeekNumber))
+                        {
+                            wk.AddHomework(hw);
                         }
                     }
                 }

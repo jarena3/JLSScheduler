@@ -302,7 +302,7 @@ namespace JLSScheduler
                 }
                 outputBox += nl;
 
-                outputBox = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData).Aggregate(outputBox, (current, s) => current + s);
+                outputBox = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData).Aggregate(outputBox, (current, s) => current + s + Environment.NewLine);
 
             }
             SyllabusPreviewBox.Text = outputBox;
