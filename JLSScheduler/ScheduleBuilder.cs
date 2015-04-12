@@ -64,8 +64,8 @@ namespace JLSScheduler
             _classWeekday = GetWeekday(cd.classDayIndex);
             _classLevel = LSClasses.Classes()[cd.classLevelIndex];
             _classBook = Books.Single(s => s.Title == _classLevel);
-            _classTime = cd.classTimeString;         
-
+            _classTime = cd.classTimeString;    
+            
             //first, get a list of all days between our range
             List<DateTime> rawdays = Enumerable.Range(0, 1 + cd.semesterEnd.Subtract(cd.semesterStart).Days)
                 .Select(offset => cd.semesterStart.AddDays(offset))
@@ -202,7 +202,7 @@ namespace JLSScheduler
                                             string.Empty, w.WeekNumber));
                                 }
 
-                                
+
                             }
 
                             chapterIterator++;
@@ -211,7 +211,7 @@ namespace JLSScheduler
 
                         }
                     }
-                    //now, if we're done with the book...
+                        //now, if we're done with the book...
                     else
                     {
                         w.Title = string.Format("{0}, {1}", w.Date, _classTime);
@@ -221,17 +221,44 @@ namespace JLSScheduler
                         }
                     }
 
-                    //check the custom homework list, and add any applicable ones to the homework list
-                    foreach (HomeworkTask hw in cd.customHomeworkList)
+                }
+
+
+            }
+
+            //check the custom homework list, and add any applicable ones to the homework list
+            var customHomeworkAdds = new List<HomeworkTask>();
+            int semesterLength = (((cd.semesterEnd - cd.semesterStart).Days) / 7) + 1;
+            Debug.WriteLine("semester length:" + semesterLength);
+            foreach (var hwt in cd.customHomeworkList)
+            {
+                if (hwt.Repeats)
+                {
+                    Debug.WriteLine("homework repeats...");
+                    for (int i = hwt.DueWeek; i <= semesterLength; i += hwt.RepeatEvery)
                     {
-                        //TODO: these need to be able to repeat
-                        foreach (Week wk in weeks.Where(wk => hw.DueWeek == wk.WeekNumber))
-                        {
-                            wk.AddHomework(hw);
-                        }
+                        Debug.WriteLine("adding homework repition at week " + i);
+                        customHomeworkAdds.Add(CopyHomeworkTask(hwt, i));
                     }
                 }
+                else
+                {
+                    customHomeworkAdds.Add(hwt);
+                }
             }
+
+            foreach (HomeworkTask hw in customHomeworkAdds)
+            {
+                foreach (Week wk in weeks.Where(wk => hw.DueWeek == wk.WeekNumber))
+                {
+                    wk.AddHomework(hw);   
+                }
+            }
+        }
+
+        private static HomeworkTask CopyHomeworkTask(HomeworkTask hwt, int weekNumber)
+        {
+            return new HomeworkTask(hwt.Title, hwt.Body, weekNumber);
         }
 
 
