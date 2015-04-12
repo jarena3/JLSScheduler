@@ -727,6 +727,7 @@
             this.ExportButton.TabIndex = 25;
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = false;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // label13
             // 
