@@ -43,7 +43,6 @@ namespace JLSScheduler
             List<string> output = new List<string>();
 
             var weeks = BuildWeeksList(cd);
-            PopulateClassWeeks(weeks, cd);
 
             foreach (Week w in weeks)
             {
@@ -104,6 +103,8 @@ namespace JLSScheduler
                 classIterator++;
               
             }
+
+            PopulateClassWeeks(classWeeks, cd);
 
             return classWeeks;
         }
@@ -262,7 +263,7 @@ namespace JLSScheduler
         }
 
 
-        private static DayOfWeek GetWeekday(int cdi)
+        public static DayOfWeek GetWeekday(int cdi)
         {
             switch (cdi)
             {

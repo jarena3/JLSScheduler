@@ -343,6 +343,18 @@ namespace JLSScheduler
             return true;
         }
 
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            StoreClassData();
+            if (DateCheck())
+            {
+                using (ExportControls ec = new ExportControls(this))
+                {
+                    ec.ShowDialog();
+                }
+            }
+        }
+
 
     }
 }

@@ -11,6 +11,7 @@
     <AssemblyName>JLSScheduler</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -50,6 +50,9 @@
     <ApplicationIcon>Resources\jlss.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocX">
+      <HintPath>..\packages\DocX.1.0.0.13\lib\net40\DocX.dll</HintPath>
+    </Reference>
     <Reference Include="LinqToExcel">
       <HintPath>..\packages\LinqToExcel.1.10.1\lib\LinqToExcel.dll</HintPath>
     </Reference>
@@ -71,6 +74,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DOCExportWriter.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,7 +112,14 @@
     <Compile Include="Forms\CustomHomeworkForm.Designer.cs">
       <DependentUpon>CustomHomeworkForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ExportControls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExportControls.Designer.cs">
+      <DependentUpon>ExportControls.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeworkTask.cs" />
+    <Compile Include="HTMLExportWriter.cs" />
     <Compile Include="LSClasses.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
@@ -130,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomHomeworkForm.resx">
       <DependentUpon>CustomHomeworkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExportControls.resx">
+      <DependentUpon>ExportControls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
