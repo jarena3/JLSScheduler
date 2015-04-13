@@ -26,13 +26,13 @@ namespace JLSScheduler
         public bool ignoreJLSHolidays;
 
         public bool weeklyReading;
-        public int weeklyReadingCount;
+        public int weeklyReadingCount = 1;
         public bool weeklyListening;
-        public int weeklyListeningCount;
+        public int weeklyListeningCount = 1;
         public bool weeklyRecitation;
-        public int weeklyRecitationCount;
+        public int weeklyRecitationCount = 1;
         public bool weeklyCustom;
-        public int weeklyCustomCount;
+        public int weeklyCustomCount = 1;
         public string weeklyCustomText;
 
         public bool firstPresentation;

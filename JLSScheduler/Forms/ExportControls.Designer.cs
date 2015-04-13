@@ -28,27 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CancelBTN = new System.Windows.Forms.Button();
             this.NTPreviewBTN = new System.Windows.Forms.Button();
             this.KTPreviewBTN = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ExportHTMLBTN = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.SaveFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.DOCBTN = new System.Windows.Forms.Button();
+            this.HTMLBTN = new System.Windows.Forms.Button();
+            this.CloseBTN = new System.Windows.Forms.Button();
+            this.PDFBTN = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // CancelBTN
-            // 
-            this.CancelBTN.Location = new System.Drawing.Point(239, 143);
-            this.CancelBTN.Name = "CancelBTN";
-            this.CancelBTN.Size = new System.Drawing.Size(121, 35);
-            this.CancelBTN.TabIndex = 0;
-            this.CancelBTN.Text = "Cancel";
-            this.CancelBTN.UseVisualStyleBackColor = true;
             // 
             // NTPreviewBTN
             // 
@@ -109,25 +105,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Preview";
             // 
-            // ExportHTMLBTN
-            // 
-            this.ExportHTMLBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExportHTMLBTN.Location = new System.Drawing.Point(185, 22);
-            this.ExportHTMLBTN.Name = "ExportHTMLBTN";
-            this.ExportHTMLBTN.Size = new System.Drawing.Size(175, 41);
-            this.ExportHTMLBTN.TabIndex = 7;
-            this.ExportHTMLBTN.Text = "Export to .HTML";
-            this.ExportHTMLBTN.UseVisualStyleBackColor = true;
-            this.ExportHTMLBTN.Click += new System.EventHandler(this.ExportHTMLBTN_Click);
-            // 
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(185, 71);
+            this.button5.Location = new System.Drawing.Point(212, 22);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(175, 41);
+            this.button5.Size = new System.Drawing.Size(284, 41);
             this.button5.TabIndex = 8;
-            this.button5.Text = "Export to .DOCX";
+            this.button5.Text = "Export as .DOCX";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -135,33 +120,111 @@
             // 
             this.SaveFolderDialog.Description = "Select folder where documents will be saved";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.PDFBTN);
+            this.groupBox2.Controls.Add(this.HTMLBTN);
+            this.groupBox2.Controls.Add(this.DOCBTN);
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Location = new System.Drawing.Point(212, 79);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(284, 153);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Experimental";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(7, 19);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(271, 32);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "Warning: these functions will fail if MS Word 15 is not installed on this compute" +
+    "r.";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // DOCBTN
+            // 
+            this.DOCBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DOCBTN.Location = new System.Drawing.Point(6, 57);
+            this.DOCBTN.Name = "DOCBTN";
+            this.DOCBTN.Size = new System.Drawing.Size(113, 38);
+            this.DOCBTN.TabIndex = 11;
+            this.DOCBTN.Text = "Export as .DOC (for older systems)";
+            this.DOCBTN.UseVisualStyleBackColor = true;
+            this.DOCBTN.Click += new System.EventHandler(this.DOCBTN_Click);
+            // 
+            // HTMLBTN
+            // 
+            this.HTMLBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.HTMLBTN.Location = new System.Drawing.Point(165, 57);
+            this.HTMLBTN.Name = "HTMLBTN";
+            this.HTMLBTN.Size = new System.Drawing.Size(113, 38);
+            this.HTMLBTN.TabIndex = 12;
+            this.HTMLBTN.Text = "Export as HTML";
+            this.HTMLBTN.UseVisualStyleBackColor = true;
+            // 
+            // CloseBTN
+            // 
+            this.CloseBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.CloseBTN.Location = new System.Drawing.Point(18, 194);
+            this.CloseBTN.Name = "CloseBTN";
+            this.CloseBTN.Size = new System.Drawing.Size(143, 38);
+            this.CloseBTN.TabIndex = 13;
+            this.CloseBTN.Text = "Close";
+            this.CloseBTN.UseVisualStyleBackColor = true;
+            this.CloseBTN.Click += new System.EventHandler(this.CloseBTN_Click);
+            // 
+            // PDFBTN
+            // 
+            this.PDFBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PDFBTN.Location = new System.Drawing.Point(84, 101);
+            this.PDFBTN.Name = "PDFBTN";
+            this.PDFBTN.Size = new System.Drawing.Size(113, 38);
+            this.PDFBTN.TabIndex = 13;
+            this.PDFBTN.Text = "Export as .PDF";
+            this.PDFBTN.UseVisualStyleBackColor = true;
+            // 
             // ExportControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 194);
+            this.ClientSize = new System.Drawing.Size(512, 244);
+            this.Controls.Add(this.CloseBTN);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.ExportHTMLBTN);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.CancelBTN);
+            this.MaximizeBox = false;
             this.Name = "ExportControls";
-            this.Text = "ExportControls";
+            this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "Export FIles";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button CancelBTN;
         private System.Windows.Forms.Button NTPreviewBTN;
         private System.Windows.Forms.Button KTPreviewBTN;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button ExportHTMLBTN;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.FolderBrowserDialog SaveFolderDialog;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button HTMLBTN;
+        private System.Windows.Forms.Button DOCBTN;
+        private System.Windows.Forms.Button CloseBTN;
+        private System.Windows.Forms.Button PDFBTN;
     }
 }

@@ -104,6 +104,9 @@ namespace JLSScheduler
               
             }
 
+            //HACK: iterate once more to remove duplicate days (holiday/class day repeats)
+            classWeeks = classWeeks.GroupBy(w => w.Date).Select(sel => sel.First()).ToList();
+
             PopulateClassWeeks(classWeeks, cd);
 
             return classWeeks;
@@ -128,6 +131,10 @@ namespace JLSScheduler
                     //if we're within the ST time range
                     if (chapterIterator <= 8)
                     {
+                        w.Title = string.Format("{0}, {1}", w.Date, _classTime);
+                        w.Subtitle = string.Format("Unit {0} : {1}", chapterIterator,
+                            _classBook.Units[chapterIterator.ToString()]);
+
                         //check for first presentation (no overlap in ST chapters)
                         if (w.WeekNumber == 4 && cd.firstPresentation)
                         {
@@ -139,11 +146,12 @@ namespace JLSScheduler
                             }
                             if (cd.firstPresentationCustomReq)
                             {
-                                w.Subtitle += "  -  " + cd.firstPresentationCustomText;
+                                w.Subtitle += " " + cd.firstPresentationCustomText;
                             }
+
                         }
                             //likewise, check for second presentation
-                        else if (w.WeekNumber == 8 && cd.secondPresentation)
+                        if (w.WeekNumber == 8 && cd.secondPresentation)
                         {
                             w.Title = string.Format("{0}, {1} - Presentation #2", w.Date, _classTime);
                             w.Subtitle = "Speaking Tree Topic Presentation";
@@ -153,15 +161,34 @@ namespace JLSScheduler
                             }
                             if (cd.secondPresentationCustomReq)
                             {
-                                w.Subtitle += "  -  " + cd.secondPresentationCustomText;
+                                w.Subtitle +=  " " + cd.secondPresentationCustomText;
                             }
+
                         }
-                            //if neither, populate as an ST week and increment chapter
-                        else
+
+                            //now, we have to make sure presentation homework overrides automated homework additions
+                            //these are presentation weeks -1, because we're dealing in due dates now
+                        if (w.WeekNumber == 3 && cd.firstPresentation)
                         {
                             w.Title = string.Format("{0}, {1}", w.Date, _classTime);
                             w.Subtitle = string.Format("Unit {0} : {1}", chapterIterator,
                                 _classBook.Units[chapterIterator.ToString()]);
+
+                            w.AddHomework(new HomeworkTask("Prepare Presentation #1","", 3));
+                        }
+                        //likewise, check for second presentation
+                        else if (w.WeekNumber == 7 && cd.secondPresentation)
+                        {
+                            w.Title = string.Format("{0}, {1}", w.Date, _classTime);
+                            w.Subtitle = string.Format("Unit {0} : {1}", chapterIterator,
+                                _classBook.Units[chapterIterator.ToString()]);
+
+                            w.AddHomework(new HomeworkTask("Prepare Presentation #2","", 7));
+                        }
+                            //if neither, populate as an ST week and increment chapter
+                        else
+                        {
+
 
 
                             //ensure that there's a next chapter to prepare for
@@ -171,27 +198,27 @@ namespace JLSScheduler
                                 if (cd.weeklyReading)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Reading",
-                                        string.Format("- Reading: Speaking Tree Chapter {0}:{1}, {2} times",
-                                            chapterIterator,
-                                            _classBook.Units[chapterIterator.ToString()], cd.weeklyReadingCount),
+                                        string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
+                                            chapterIterator + 1,
+                                            _classBook.Units[(chapterIterator+1).ToString()], cd.weeklyReadingCount),
                                         w.WeekNumber));
                                 }
 
                                 if (cd.weeklyListening)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Listening",
-                                        string.Format("- Listening: Speaking Tree Chapter {0}:{1}, {2} times",
-                                            chapterIterator,
-                                            _classBook.Units[chapterIterator.ToString()], cd.weeklyListeningCount),
+                                        string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
+                                            chapterIterator+1,
+                                            _classBook.Units[(chapterIterator+1).ToString()], cd.weeklyListeningCount),
                                         w.WeekNumber));
                                 }
 
                                 if (cd.weeklyRecitation)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Speaking",
-                                        string.Format("- Recitation: Speaking Tree Chapter {0}:{1}, {2} times",
-                                            chapterIterator,
-                                            _classBook.Units[chapterIterator.ToString()], cd.weeklyRecitationCount),
+                                        string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
+                                            chapterIterator+1,
+                                            _classBook.Units[(chapterIterator+1).ToString()], cd.weeklyRecitationCount),
                                         w.WeekNumber));
                                 }
 
@@ -199,7 +226,7 @@ namespace JLSScheduler
                                 {
                                     w.AddHomework(
                                         new HomeworkTask(
-                                            string.Format("- {0}, {1} times", cd.weeklyCustomText, cd.weeklyCustomCount),
+                                            string.Format("{0}, {1} times", cd.weeklyCustomText, cd.weeklyCustomCount),
                                             string.Empty, w.WeekNumber));
                                 }
 
@@ -238,7 +265,6 @@ namespace JLSScheduler
                     Debug.WriteLine("homework repeats...");
                     for (int i = hwt.DueWeek; i <= semesterLength; i += hwt.RepeatEvery)
                     {
-                        Debug.WriteLine("adding homework repition at week " + i);
                         customHomeworkAdds.Add(CopyHomeworkTask(hwt, i));
                     }
                 }

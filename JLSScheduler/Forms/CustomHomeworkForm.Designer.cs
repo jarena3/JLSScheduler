@@ -135,7 +135,7 @@
             // 
             this.RepeatsCT.Location = new System.Drawing.Point(104, 283);
             this.RepeatsCT.Maximum = new decimal(new int[] {
-            4,
+            10,
             0,
             0,
             0});
@@ -165,11 +165,6 @@
             // WeekNumberCT
             // 
             this.WeekNumberCT.Location = new System.Drawing.Point(104, 258);
-            this.WeekNumberCT.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
             this.WeekNumberCT.Minimum = new decimal(new int[] {
             1,
             0,
