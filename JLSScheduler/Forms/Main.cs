@@ -282,7 +282,7 @@ namespace JLSScheduler
             {
                 outputBox += "Schedule Generation Complete." + Environment.NewLine +
                              "This is a preview of the class schedule. Please review this to ensure the homework tasks and holiday exceptions are correct." + Environment.NewLine +
-                             "Then, press [Export] to generate A folder containing formatted, printable handouts.";
+                             "Then, press [Export] to generate a folder containing formatted, printable handouts.";
                 outputBox += nl;
                 outputBox += "";
                 outputBox += "NT: " + LoadedClassData.NTname + "   |    KT: " + LoadedClassData.KTname + Environment.NewLine;

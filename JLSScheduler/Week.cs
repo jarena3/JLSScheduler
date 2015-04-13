@@ -89,7 +89,7 @@ namespace JLSScheduler
             string output = Title + Environment.NewLine + Subtitle + Environment.NewLine;
             foreach (HomeworkTask hw in HomeworkList)
             {
-                output += hw.Title + Environment.NewLine + hw.Body + Environment.NewLine;
+                output += hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine;
             }
             return output;
         }
