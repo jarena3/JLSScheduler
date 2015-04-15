@@ -19,7 +19,7 @@
     </section>
 
     <section class="main-content">
-      <p><a href="#howto">Jump to Tutorial</a></p>
+      <p><a href="#howto">Jump to Tutorial</a>  |  <a href="#">Download Installer</a></p>
 
 <h1>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h1>
@@ -59,9 +59,11 @@
 <h3>
 <a id="main-screen" class="anchor" href="#main-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main screen</h3>
 
-<p>Start JLSHomeworkUtility.exe, and you'll see the following:<br>
-<img src="http://i.imgur.com/dCWKF5y.png" alt=""><br>
-Fill out these fields (they should be self-explanatory)<br>
+<p>Start JLSHomeworkUtility.exe, and you'll see the following:  </p>
+
+<p><img src="http://i.imgur.com/dCWKF5y.png" alt="">   </p>
+
+<p>Fill out these fields (they should be self-explanatory)<br>
 The utility will use the settings you select here to build class information. Adding students will generate a individualized syllabus, homework sheet, and parent handout for each student added. Students' Korean names <a href="#jls-excel">can be imported from lpt.gojls excel files</a>.</p>
 
 <h3>
@@ -83,14 +85,16 @@ In other words, enabling the week 4 presentation will push the Unit 4 class day 
 
 <p>The Edit Custom Homework dialog allows for greater flexibility in planning semester homework. Click <strong>Add New</strong> to add a new homework task to the list, and select it to edit it. The <em>Title</em> will appear on homework sheets and checklists, and the <em>Title</em> and <em>Body</em> will appear on syllabuses.</p>
 
-<p>The <strong>Due on week # *<em>field determines the due date of the *first</em> instance of this homework tasks, and the **Repeats every</strong> checkbox adds this homework task once per the value set in the <strong>weeks</strong> box.</p>
+<p>The <strong>Due on week #</strong> field determines the due date of the <em>first</em> instance of this homework tasks, and the <strong>Repeats every</strong> checkbox adds this homework task once per the value set in the <strong>weeks</strong> box.</p>
 
-<p></p>
+<blockquote>
+<p>This dialog does not automatically update its contents, so be sure to save edited homework tasks before closing</p>
+</blockquote>
 
 <h3>
 <a id="edit-custom-holidays" class="anchor" href="#edit-custom-holidays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit Custom Holidays</h3>
 
-<p><a href="http://i.imgur.com/VsufVgh.png">http://i.imgur.com/VsufVgh.png</a>    </p>
+<p>![]<a href="http://i.imgur.com/VsufVgh.png">http://i.imgur.com/VsufVgh.png</a>    </p>
 
 <p>This dialog is fairly straightforward. Click days to mark them as holidays (no class, homework will not be assigned or due), and click again to unmark them. Dates in <strong>bold</strong> are marked holidays. A list of all custom marked holidays is under the <strong>Custom Holidays</strong> tab, and all national and JLS holidays are under the <strong>All Holidays</strong> tab.</p>
 
@@ -104,7 +108,7 @@ In other words, enabling the week 4 presentation will push the Unit 4 class day 
 <h3>
 <a id="export" class="anchor" href="#export" aria-hidden="true"><span class="octicon octicon-link"></span></a>Export</h3>
 
-<p><a href="http://i.imgur.com/yLsriMQ.png">http://i.imgur.com/yLsriMQ.png</a><br>
+<p>![]<a href="http://i.imgur.com/yLsriMQ.png">http://i.imgur.com/yLsriMQ.png</a><br>
 The utility's ultimate objective is to produce well-formatted .DOCX (Microsoft Word 2007 or later) files. It should do this pretty much no problem, regardless of whether or not the system has MS Word actually installed. Just hit <strong>Export as .DOCX</strong> and select the destination folder.</p>
 
 <p>If word <em>is</em> installed, the <strong>Export as .DOC</strong> should work without issue.</p>
@@ -136,7 +140,14 @@ The utility's ultimate objective is to produce well-formatted .DOCX (Microsoft W
 
 <p>This creates a .JLSC file at the chosen location. These files can be loaded through <strong>File -&gt; Load Class Data - &gt; Load .JLSC File</strong> and edited or exported at a later date.</p>
 
-<p>&lt;.JLSC files are able to be read by the JLS Homework Utility installed on any system. However, if <a href="#json-edit">the utility JSON files are edited</a>, .JLSC files created by other copies of the program may not be able to be read, and vice-versa&gt;</p>
+<blockquote>
+<p>.JLSC files are able to be read by the JLS Homework Utility installed on any system. However, if <a href="#json-edit">the utility JSON files are edited</a>, .JLSC files created by other copies of the program may not be able to be read, and vice-versa</p>
+</blockquote>
+
+<h3>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<p>An example class file and output can be found in the <a href="#examples">GitHub repository</a>.</p>
 
 <hr>
 
@@ -155,9 +166,9 @@ The utility's ultimate objective is to produce well-formatted .DOCX (Microsoft W
 
 <p><img src="http://i.imgur.com/lEuvh6F.png" alt="Shouldn't this be &quot;액샐&quot;?"></p>
 
-<p>Click "Yes"/"예" from the window that pops up:  </p>
+<p>Click "Yes"/"예" from the window that pops up  </p>
 
-<p><img src="http://i.imgur.com/WGqFPPE" alt=""></p>
+<p><img src="http://i.imgur.com/WGqFPPE.png" alt=""></p>
 
 <p>Select the download folder, and click "Ok" on the next popup.</p>
 
@@ -186,19 +197,24 @@ Otherwise, this is how you extend the utility:</p>
 Inside this file, simply add a new line surrounded in quotes to describe your new time. If you're adding the time to the beginning or middle of the list, you'll need to end it with a comma, like this:   </p>
 
 <blockquote>
-<p>"1:00-2:00",<br>
-But, if you're adding a new time to the end of the list, don't include the comma, like this:<br>
-   "9:00-10:00"<br>
-Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
-Save the file and open the Homework Utility program. Your new time should appear in the drop-down list.</p>
+<p>"1:00-2:00",    </p>
 </blockquote>
+
+<p>But, if you're adding a new time to the end of the list, don't include the comma, like this:  </p>
+
+<blockquote>
+<p>"9:00-10:00"    </p>
+</blockquote>
+
+<p>Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
+Save the file and open the Homework Utility program. Your new time should appear in the drop-down list.</p>
 
 <h2>
 <a id="adding-or-editing-holidays" class="anchor" href="#adding-or-editing-holidays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding or Editing Holidays</h2>
 
 <p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find text files called <strong>JLSHolidays.txt</strong> and <strong>KRHolidays.txt</strong>. Open either, but know that the Homework Utility <a href="#addholiday">already contains a method for adding custom holidays to a class schedule</a>. Edit these to change or add holidays <em>globally</em>.</p>
 
-<p>Inside this file, add a new line in the following format:   </p>
+<p>Inside this file, add a new line in the following format:  </p>
 
 <blockquote>
 <p>"D/MM/YYYY": "My Custom Holiday",   </p>
@@ -212,17 +228,22 @@ Save the file and open the Homework Utility program. Your new time should appear
 <a id="adding-a-new-class-level" class="anchor" href="#adding-a-new-class-level" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Class Level</h2>
 
 <p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find a text file called <strong>ClassLevels.txt</strong> open that.<br>
-Inside this file, simply add a new line surrounded in quotes to describe the new class. If you're adding the class to the beginning or middle of the list, you'll need to end it with a comma, like this:    </p>
+Inside this file, simply add a new line surrounded in quotes to describe the new class. If you're adding the class to the beginning or middle of the list, you'll need to end it with a comma, like this:   </p>
 
 <blockquote>
-<p>"My New Class",<br>
-But, if you're adding a new class to the end of the list, don't include the comma, like this:<br>
-   "My New Class"<br>
-Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
-Save the file and return to the <strong>Resources</strong> folder.  </p>
+<p>"My New Class",    </p>
 </blockquote>
 
-<p>If you <strong>will not use</strong> the <a href="*sthomeworkoptions">automatic Speaking Tree homework generation options</a> for this class, you can use the program normally, just know that if you try to use those options with this new class, schedule generation will fail. Otherwise, you'll have to add a class book, as described below:</p>
+<p>But, if you're adding a new class to the end of the list, don't include the comma, like this:   </p>
+
+<blockquote>
+<p>"My New Class"    </p>
+</blockquote>
+
+<p>Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
+Save the file and return to the <strong>Resources</strong> folder.  </p>
+
+<p>If you <strong>will not use</strong> the <a href="#custom-homework">automatic Speaking Tree homework generation options</a> for this class, you can use the program normally, just know that if you try to use those options with this new class, schedule generation will fail. Otherwise, you'll have to add a class book, as described below:</p>
 
 <h2>
 <a id="adding-a-new-book" class="anchor" href="#adding-a-new-book" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Book</h2>
