@@ -126,7 +126,9 @@ namespace JLSScheduler
 
         private void openXLSFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            var classXLS = new LinqToExcel.ExcelQueryFactory(openXLSFileDialog.FileName);
+            var path = Path.GetFullPath(openXLSFileDialog.FileName);
+
+            var classXLS = new LinqToExcel.ExcelQueryFactory(path);
 
             var studentsKRnames = from c in classXLS.Worksheet(0)
                                   select c["학생"];
@@ -361,6 +363,16 @@ namespace JLSScheduler
                     ec.ShowDialog();
                 }
             }
+        }
+
+        private void usageGuideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://jarena3.github.io/JLSScheduler/");
+        }
+
+        private void reportBugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://goo.gl/forms/ZD34SdhlOv");
         }
 
 
