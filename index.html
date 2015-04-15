@@ -51,8 +51,8 @@
 
 <p><a name="howto"></a></p>
 
-<h3>
-<a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>How-to</h3>
+<h1>
+<a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>How-to</h1>
 
 <p>Stuff here</p>
 
@@ -60,13 +60,71 @@
 
 <p><a name="json-edit"></a></p>
 
-<h3>
-<a id="adding-custom-class-levels-and-times" class="anchor" href="#adding-custom-class-levels-and-times" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Custom Class Levels and Times</h3>
+<h1>
+<a id="adding-custom-class-levels-and-times" class="anchor" href="#adding-custom-class-levels-and-times" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Custom Class Levels and Times</h1>
 
-<p>Stuff here</p>
+<p>This is all done in JSON, so if you're familiar with it you should need no instruction.
+Otherwise, this is how you extend the utility:</p>
 
-<h3>
-<a id="bugs" class="anchor" href="#bugs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bugs</h3>
+<h2>
+<a id="adding-a-new-time" class="anchor" href="#adding-a-new-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Time</h2>
+
+<p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find a text file called <strong>ClassTimes.txt</strong> open that.<br>
+Inside this file, simply add a new line surrounded in quotes to describe your new time. If you're adding the time to the beginning or middle of the list, you'll need to end it with a comma, like this:<br>
+    "1:00-2:00",<br>
+But, if you're adding a new time to the end of the list, don't include the comma, like this:
+    "9:00-10:00"<br>
+Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
+Save the file and open the Homework Utility program. Your new time should appear in the drop-down list.</p>
+
+<h2>
+<a id="adding-or-editing-holidays" class="anchor" href="#adding-or-editing-holidays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding or Editing Holidays</h2>
+
+<p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find text files called <strong>JLSHolidays.txt</strong> and <strong>KRHolidays.txt</strong>. Open either, but know that the Homework Utility <a href="#addholiday">already contains a method for adding custom holidays to a class schedule</a>. Edit these to change or add holidays <em>globally</em>.</p>
+
+<p>Inside this file, add a new line in the following format: 
+    "D/MM/YYYY": "My Custom Holiday",</p>
+
+<p>Ensure that all entries <strong>except for</strong> the final one end with a comma. Failure to do this will result in the program being unable to understand the data.</p>
+
+<p>Save the file and open the Homework Utility program. Your new holiday should automatically apply to every schedule you generate from now on.</p>
+
+<h2>
+<a id="adding-a-new-class-level" class="anchor" href="#adding-a-new-class-level" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Class Level</h2>
+
+<p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find a text file called <strong>ClassLevels.txt</strong> open that.<br>
+Inside this file, simply add a new line surrounded in quotes to describe the new class. If you're adding the class to the beginning or middle of the list, you'll need to end it with a comma, like this:<br>
+    "My New Class",<br>
+But, if you're adding a new classto the end of the list, don't include the comma, like this:
+    "My New Class"<br>
+Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
+Save the file and return to the <strong>Resources</strong> folder.  </p>
+
+<p>If you <strong>will not use</strong> the <a href="*sthomeworkoptions">automatic Speaking Tree homework generation options</a> for this class, you can use the program normally, just know that if you try to use those options with this new class, schedule generation will fail. Otherwise, you'll have to add a class book, as described below:</p>
+
+<h2>
+<a id="adding-a-new-book" class="anchor" href="#adding-a-new-book" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Book</h2>
+
+<p>In the <strong>Resources</strong> folder, the <strong>Books.txt</strong> file contains book data, and the syntax is as follows:
+    {
+        "Title": "My Class Name (must be the same as the entry in ClassLevels.txt",
+        "Units": {
+            "1": "Unit 1 Title",
+            "2": "Unit 2 Title",
+            "3": "Unit 3 Title",
+            "4": "Unit 4 Title",
+            "5": "Unit 5 Title",
+            "6": "Unit 6 Title",
+            "7": "Unit 7 Title",
+            "8": "Unit 8 Title"
+        }
+    },</p>
+
+<p>Once again, every entry must terminate in a comma except for the final entry.
+After adding the book for your new class, the program should be able to generate automatic homework lists for your class. </p>
+
+<h1>
+<a id="bugs" class="anchor" href="#bugs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bugs</h1>
 
 <p>Stuff here</p>
 
