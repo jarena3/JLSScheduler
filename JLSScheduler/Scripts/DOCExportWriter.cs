@@ -56,7 +56,6 @@ namespace JLSScheduler
                 WriteAllStudentsChecklistSection(doc, weeks, cd);
 
                 doc.Save();
-                Debug.WriteLine("Created in: " + folder);
             }
 
 
@@ -73,7 +72,6 @@ namespace JLSScheduler
                 WriteSyllabusSection(doc, weeks, string.Empty);
 
                 doc.Save();
-                Debug.WriteLine("Created in: " + folder);
             }
         }
 
@@ -126,10 +124,11 @@ namespace JLSScheduler
                 }
 
                 Table t = doc.AddTable(2, 5);
-                t.AutoFit = AutoFit.Window;
+//                t.AutoFit = AutoFit.ColumnWidth;
 
                 t.Alignment = Alignment.center;
-                // Add content to this Table.
+
+                //add content
                 t.Rows[0].Cells[0].Paragraphs.First().Append("Date Assigned").Bold().FontSize(9);
                 t.Rows[0].Cells[1].Paragraphs.First().Append("Date Due").Bold().FontSize(9);
                 t.Rows[0].Cells[2].Paragraphs.First().Append("Assignment").Bold().FontSize(9);
@@ -138,7 +137,29 @@ namespace JLSScheduler
                 t.Rows[1].Cells[0].Paragraphs.First().Append(week.DateTime.ToShortDateString()).Italic().FontSize(8);
                 t.Rows[1].Cells[1].Paragraphs.First().Append(dueDate).Italic().FontSize(8);
                 t.Rows[1].Cells[2].Paragraphs.First().Append(weeklyHomework).FontSize(7);
-                // Insert the Table into the document.
+
+                //size the columns
+                float space = doc.PageWidth - doc.MarginLeft - doc.MarginRight;
+
+                
+
+                t.Rows[0].Cells[0].Width = Math.Round(0.08 * space);
+                t.Rows[1].Cells[0].Width = Math.Round(0.08 * space);
+
+                t.Rows[0].Cells[1].Width = Math.Round(0.08 * space);
+                t.Rows[1].Cells[1].Width = Math.Round(0.08 * space);
+
+                t.Rows[0].Cells[2].Width = Math.Round(0.4 * space);
+                t.Rows[1].Cells[2].Width = Math.Round(0.4 * space);
+
+                t.Rows[0].Cells[3].Width = Math.Round(0.2 * space);
+                t.Rows[1].Cells[3].Width = Math.Round(0.2 * space);
+
+                t.Rows[0].Cells[4].Width = Math.Round(0.2 * space);
+                t.Rows[1].Cells[4].Width = Math.Round(0.2 * space);
+
+
+                //insert into document.
                 doc.InsertTable(t);
             }
         }
@@ -150,7 +171,7 @@ namespace JLSScheduler
             string name = !string.IsNullOrEmpty(tuple.Item2) ? tuple.Item2 : tuple.Item1;
 
             p1.Append(string.Format("안녕하세요.{0}" +
-                                    "이것은 {1}부터 {2}까지 JLS의 네이티브 선생님 수업을 듣는 여러분의 자녀들을 위해 만들어진 과제 일람표입니다{0}" +
+                                    "아래의 표는{1}부터 {2}까지 JLS의 네이티브 선생님 수업을 듣는 여러분의 자녀들을 위해 만들어진 과제 일람표입니다.{0}" +
                                     "{3} 학생이 과제를 잘 따라가고 있는지 확인해보세요." +
                                     "{0}감사합니다." +
                                     "{0}{4}, JLS NT", 

@@ -36,22 +36,6 @@ namespace JLSScheduler.Forms
             DOCBTN.Text = "Export as .DOC" + Environment.NewLine + " (Requires MS Word installed on this system)";
         }
 
-        private void ExportHTMLBTN_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var path = dialog.SelectedPath;
-                    HTMLExportWriter.WriteToHtml(_main.LoadedClassData,
-                        ScheduleBuilder.BuildWeeksList(_main.LoadedClassData), path);
-                }
-
-            }
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             using (var dialog = new FolderBrowserDialog())
