@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JLSScheduler", "JLSScheduler\JLSScheduler.csproj", "{51F72E3A-C3E3-4C99-B972-10AF746C4EC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JLSHomeworkUtility", "JLSScheduler\JLSHomeworkUtility.csproj", "{51F72E3A-C3E3-4C99-B972-10AF746C4EC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

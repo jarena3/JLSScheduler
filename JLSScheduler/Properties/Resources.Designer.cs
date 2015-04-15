@@ -22,7 +22,7 @@ namespace JLSScheduler.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace JLSScheduler.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("JLSScheduler.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace JLSScheduler.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -82,7 +82,7 @@ namespace JLSScheduler.Properties {
         ///            &quot;2&quot;: &quot;Moko to the Rescue&quot;,
         ///            &quot;3&quot;: &quot;Whi [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Books {
+        public static string Books {
             get {
                 return ResourceManager.GetString("Books", resourceCulture);
             }
@@ -90,8 +90,6 @@ namespace JLSScheduler.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///    &quot;DSC&quot;,
-        ///    &quot;DSD&quot;,
         ///    &quot;LSA-1&quot;,
         ///    &quot;LSA-2&quot;,
         ///    &quot;LSB-1&quot;,
@@ -99,14 +97,10 @@ namespace JLSScheduler.Properties {
         ///    &quot;LSC-1&quot;,
         ///    &quot;LSC-2&quot;,
         ///    &quot;LSD-1&quot;,
-        ///    &quot;LSD-2&quot;,
-        ///    &quot;MSA1&quot;,
-        ///    &quot;MSA-2&quot;,
-        ///    &quot;MSB-1&quot;,
-        ///    &quot;MSB2&quot;
+        ///    &quot;LSD-2&quot;
         ///].
         /// </summary>
-        internal static string ClassLevels {
+        public static string ClassLevels {
             get {
                 return ResourceManager.GetString("ClassLevels", resourceCulture);
             }
@@ -126,7 +120,7 @@ namespace JLSScheduler.Properties {
         ///    &quot;12/25/2015&quot;: &quot;JLS Winter Holiday Day 5&quot;
         ///}.
         /// </summary>
-        internal static string JLSHolidays {
+        public static string JLSHolidays {
             get {
                 return ResourceManager.GetString("JLSHolidays", resourceCulture);
             }
@@ -148,7 +142,7 @@ namespace JLSScheduler.Properties {
         ///    &quot;9/28/2015&quot;: &quot;Chuseok Festival Day 3&quot;,
         ///    &quot;9/29/2015&quot;: &quot;Chuseo [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string KRHolidays {
+        public static string KRHolidays {
             get {
                 return ResourceManager.GetString("KRHolidays", resourceCulture);
             }
@@ -169,7 +163,7 @@ namespace JLSScheduler.Properties {
         ///
         ///.
         /// </summary>
-        internal static string MWFTimes {
+        public static string MWFTimes {
             get {
                 return ResourceManager.GetString("MWFTimes", resourceCulture);
             }
@@ -185,7 +179,7 @@ namespace JLSScheduler.Properties {
         ///        &quot;8:05-9:25&quot;
         ///    ].
         /// </summary>
-        internal static string TRTimes {
+        public static string TRTimes {
             get {
                 return ResourceManager.GetString("TRTimes", resourceCulture);
             }

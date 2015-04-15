@@ -31,13 +31,13 @@
             this.button5 = new System.Windows.Forms.Button();
             this.SaveFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ODTBTN = new System.Windows.Forms.Button();
+            this.XPSBTN = new System.Windows.Forms.Button();
             this.PDFBTN = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.HTMLBTN = new System.Windows.Forms.Button();
             this.DOCBTN = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.CloseBTN = new System.Windows.Forms.Button();
-            this.XPSBTN = new System.Windows.Forms.Button();
-            this.ODTBTN = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +46,7 @@
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.Location = new System.Drawing.Point(8, 22);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(194, 41);
+            this.button5.Size = new System.Drawing.Size(194, 68);
             this.button5.TabIndex = 8;
             this.button5.Text = "Export as .DOCX";
             this.button5.UseVisualStyleBackColor = true;
@@ -70,6 +70,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Experimental";
             // 
+            // ODTBTN
+            // 
+            this.ODTBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ODTBTN.Location = new System.Drawing.Point(158, 85);
+            this.ODTBTN.Name = "ODTBTN";
+            this.ODTBTN.Size = new System.Drawing.Size(120, 23);
+            this.ODTBTN.TabIndex = 15;
+            this.ODTBTN.Text = "Export as .ODT";
+            this.ODTBTN.UseVisualStyleBackColor = true;
+            this.ODTBTN.Click += new System.EventHandler(this.ODTBTN_Click);
+            // 
+            // XPSBTN
+            // 
+            this.XPSBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.XPSBTN.Location = new System.Drawing.Point(158, 57);
+            this.XPSBTN.Name = "XPSBTN";
+            this.XPSBTN.Size = new System.Drawing.Size(120, 23);
+            this.XPSBTN.TabIndex = 14;
+            this.XPSBTN.Text = "Export as .XPS";
+            this.XPSBTN.UseVisualStyleBackColor = true;
+            this.XPSBTN.Click += new System.EventHandler(this.XPSBTN_Click);
+            // 
             // PDFBTN
             // 
             this.PDFBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -80,28 +102,6 @@
             this.PDFBTN.Text = "Export as .PDF";
             this.PDFBTN.UseVisualStyleBackColor = true;
             this.PDFBTN.Click += new System.EventHandler(this.PDFBTN_Click);
-            // 
-            // HTMLBTN
-            // 
-            this.HTMLBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HTMLBTN.Location = new System.Drawing.Point(7, 84);
-            this.HTMLBTN.Name = "HTMLBTN";
-            this.HTMLBTN.Size = new System.Drawing.Size(120, 23);
-            this.HTMLBTN.TabIndex = 12;
-            this.HTMLBTN.Text = "Export as .HTML";
-            this.HTMLBTN.UseVisualStyleBackColor = true;
-            this.HTMLBTN.Click += new System.EventHandler(this.HTMLBTN_Click);
-            // 
-            // DOCBTN
-            // 
-            this.DOCBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DOCBTN.Location = new System.Drawing.Point(8, 81);
-            this.DOCBTN.Name = "DOCBTN";
-            this.DOCBTN.Size = new System.Drawing.Size(194, 38);
-            this.DOCBTN.TabIndex = 11;
-            this.DOCBTN.Text = "Export as .DOC";
-            this.DOCBTN.UseVisualStyleBackColor = true;
-            this.DOCBTN.Click += new System.EventHandler(this.DOCBTN_Click);
             // 
             // textBox1
             // 
@@ -117,6 +117,28 @@
     "ome older versions of Word.";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // HTMLBTN
+            // 
+            this.HTMLBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.HTMLBTN.Location = new System.Drawing.Point(7, 84);
+            this.HTMLBTN.Name = "HTMLBTN";
+            this.HTMLBTN.Size = new System.Drawing.Size(120, 23);
+            this.HTMLBTN.TabIndex = 12;
+            this.HTMLBTN.Text = "Export as .HTML";
+            this.HTMLBTN.UseVisualStyleBackColor = true;
+            this.HTMLBTN.Click += new System.EventHandler(this.HTMLBTN_Click);
+            // 
+            // DOCBTN
+            // 
+            this.DOCBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DOCBTN.Location = new System.Drawing.Point(8, 96);
+            this.DOCBTN.Name = "DOCBTN";
+            this.DOCBTN.Size = new System.Drawing.Size(194, 68);
+            this.DOCBTN.TabIndex = 11;
+            this.DOCBTN.Text = "Export as .DOC";
+            this.DOCBTN.UseVisualStyleBackColor = true;
+            this.DOCBTN.Click += new System.EventHandler(this.DOCBTN_Click);
+            // 
             // CloseBTN
             // 
             this.CloseBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -127,28 +149,6 @@
             this.CloseBTN.Text = "Close";
             this.CloseBTN.UseVisualStyleBackColor = true;
             this.CloseBTN.Click += new System.EventHandler(this.CloseBTN_Click);
-            // 
-            // XPSBTN
-            // 
-            this.XPSBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.XPSBTN.Location = new System.Drawing.Point(158, 57);
-            this.XPSBTN.Name = "XPSBTN";
-            this.XPSBTN.Size = new System.Drawing.Size(120, 23);
-            this.XPSBTN.TabIndex = 14;
-            this.XPSBTN.Text = "Export as .XPS";
-            this.XPSBTN.UseVisualStyleBackColor = true;
-            this.XPSBTN.Click += new System.EventHandler(this.XPSBTN_Click);
-            // 
-            // ODTBTN
-            // 
-            this.ODTBTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ODTBTN.Location = new System.Drawing.Point(158, 85);
-            this.ODTBTN.Name = "ODTBTN";
-            this.ODTBTN.Size = new System.Drawing.Size(120, 23);
-            this.ODTBTN.TabIndex = 15;
-            this.ODTBTN.Text = "Export as .ODT";
-            this.ODTBTN.UseVisualStyleBackColor = true;
-            this.ODTBTN.Click += new System.EventHandler(this.ODTBTN_Click);
             // 
             // ExportControls
             // 

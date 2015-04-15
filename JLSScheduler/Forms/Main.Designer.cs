@@ -36,11 +36,6 @@
             this.loadFromJLSHUFiileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveClassDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eDITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.studentSyllabusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.studentHomeworkSheetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kTInfoPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hELPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usageGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportBugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +112,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fILEToolStripMenuItem,
-            this.eDITToolStripMenuItem,
             this.hELPToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -138,7 +132,8 @@
             // newClassToolStripMenuItem
             // 
             this.newClassToolStripMenuItem.Name = "newClassToolStripMenuItem";
-            this.newClassToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.newClassToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newClassToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.newClassToolStripMenuItem.Text = "New Class";
             this.newClassToolStripMenuItem.Click += new System.EventHandler(this.newClassToolStripMenuItem_Click);
             // 
@@ -148,7 +143,7 @@
             this.loadFromJLSHUFiileToolStripMenuItem,
             this.loadFromToolStripMenuItem});
             this.loadClassToolStripMenuItem.Name = "loadClassToolStripMenuItem";
-            this.loadClassToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.loadClassToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.loadClassToolStripMenuItem.Text = "Load Class";
             // 
             // loadFromJLSHUFiileToolStripMenuItem
@@ -168,44 +163,10 @@
             // saveClassDataToolStripMenuItem
             // 
             this.saveClassDataToolStripMenuItem.Name = "saveClassDataToolStripMenuItem";
-            this.saveClassDataToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.saveClassDataToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveClassDataToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.saveClassDataToolStripMenuItem.Text = "Save Class Data";
             this.saveClassDataToolStripMenuItem.Click += new System.EventHandler(this.saveClassDataToolStripMenuItem_Click);
-            // 
-            // eDITToolStripMenuItem
-            // 
-            this.eDITToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scheduleToolStripMenuItem,
-            this.studentSyllabusToolStripMenuItem,
-            this.studentHomeworkSheetToolStripMenuItem,
-            this.kTInfoPageToolStripMenuItem});
-            this.eDITToolStripMenuItem.Name = "eDITToolStripMenuItem";
-            this.eDITToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.eDITToolStripMenuItem.Text = "VIEW";
-            // 
-            // scheduleToolStripMenuItem
-            // 
-            this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
-            this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.scheduleToolStripMenuItem.Text = "Schedule";
-            // 
-            // studentSyllabusToolStripMenuItem
-            // 
-            this.studentSyllabusToolStripMenuItem.Name = "studentSyllabusToolStripMenuItem";
-            this.studentSyllabusToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.studentSyllabusToolStripMenuItem.Text = "Student Syllabus";
-            // 
-            // studentHomeworkSheetToolStripMenuItem
-            // 
-            this.studentHomeworkSheetToolStripMenuItem.Name = "studentHomeworkSheetToolStripMenuItem";
-            this.studentHomeworkSheetToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.studentHomeworkSheetToolStripMenuItem.Text = "Student Homework Sheet";
-            // 
-            // kTInfoPageToolStripMenuItem
-            // 
-            this.kTInfoPageToolStripMenuItem.Name = "kTInfoPageToolStripMenuItem";
-            this.kTInfoPageToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.kTInfoPageToolStripMenuItem.Text = "KT Info Page";
             // 
             // hELPToolStripMenuItem
             // 
@@ -213,6 +174,7 @@
             this.usageGuideToolStripMenuItem,
             this.reportBugToolStripMenuItem,
             this.aboutToolStripMenuItem});
+            this.hELPToolStripMenuItem.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.hELPToolStripMenuItem.Name = "hELPToolStripMenuItem";
             this.hELPToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.hELPToolStripMenuItem.Text = "HELP";
@@ -220,19 +182,22 @@
             // usageGuideToolStripMenuItem
             // 
             this.usageGuideToolStripMenuItem.Name = "usageGuideToolStripMenuItem";
-            this.usageGuideToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.usageGuideToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.usageGuideToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.usageGuideToolStripMenuItem.Text = "Documentation";
+            this.usageGuideToolStripMenuItem.Click += new System.EventHandler(this.usageGuideToolStripMenuItem_Click);
             // 
             // reportBugToolStripMenuItem
             // 
             this.reportBugToolStripMenuItem.Name = "reportBugToolStripMenuItem";
-            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.reportBugToolStripMenuItem.Text = "Report Bug";
+            this.reportBugToolStripMenuItem.Click += new System.EventHandler(this.reportBugToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -880,13 +845,8 @@
         private System.Windows.Forms.ToolStripMenuItem loadClassToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadFromJLSHUFiileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadFromToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eDITToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hELPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveClassDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem studentSyllabusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem studentHomeworkSheetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kTInfoPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usageGuideToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportBugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
