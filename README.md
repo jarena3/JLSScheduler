@@ -1,7 +1,7 @@
 # JLS Homework Scheduling Utility
 
 ##Planned Features:
-+ *Refactoring*, which it really needs
++ Refactoring, which it really needs
 + Better exception handling
 + Formatting options for exported files, custom headers, etc.
 + LPT scraping to automatically generate files for your classes (if I can get access)
