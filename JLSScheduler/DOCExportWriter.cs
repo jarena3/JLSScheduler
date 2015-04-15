@@ -126,6 +126,7 @@ namespace JLSScheduler
                 }
 
                 Table t = doc.AddTable(2, 5);
+                t.AutoFit = AutoFit.Window;
 
                 t.Alignment = Alignment.center;
                 // Add content to this Table.

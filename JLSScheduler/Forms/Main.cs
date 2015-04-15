@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JLSScheduler.Forms;
@@ -21,6 +23,12 @@ namespace JLSScheduler
         #region init
         public Main()
         {
+            //lock these to en-US
+            //allowing system culture seems to cause problems with DocX
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
             InitializeComponent();
             //deserialize the book lists for later use
             ScheduleBuilder.Init();
