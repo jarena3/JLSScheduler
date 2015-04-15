@@ -56,7 +56,89 @@
 <h1>
 <a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>How-to</h1>
 
-<p>To open</p>
+<h3>
+<a id="main-screen" class="anchor" href="#main-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main screen</h3>
+
+<p>Start JLSHomeworkUtility.exe, and you'll see the following:<br>
+<img src="http://i.imgur.com/dCWKF5y.png" alt=""><br>
+Fill out these fields (they should be self-explanatory)<br>
+The utility will use the settings you select here to build class information. Adding students will generate a individualized syllabus, homework sheet, and parent handout for each student added. Students' Korean names <a href="#jls-excel">can be imported from lpt.gojls excel files</a>.</p>
+
+<h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options:</h3>
+
+<p>The <strong>Speaking Tree</strong> toggles auto-generate common speaking tree homework tasks, and add them to each week's homework list. The <strong>Custom</strong> field will add whatever is in its text box as a weekly task. If you need more custom tasks, or finer control on when they repeat, click the <a href="#custom-homework">edit custom homework</a> button in the lower right.</p>
+
+<p>The <strong>Presentations</strong>, if toggled, will <em>override the homework the week before</em>, and replace it with "prepare presentation". The homework that was originally due on that week will be moved one week up, consistent with recommended workloads.<br>
+In other words, enabling the week 4 presentation will push the Unit 4 class day (and the relevant homework assignments) to the 5th week. <a href="#custom-homework">Custom homework</a> will still occur on these days.</p>
+
+<p>Finally, the <strong>Review</strong> toggle will pad the last classes, if the semester includes them, with review days.</p>
+
+<p><a name="custom-homework"></a></p>
+
+<h3>
+<a id="edit-custom-homework" class="anchor" href="#edit-custom-homework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit Custom Homework</h3>
+
+<p><img src="http://i.imgur.com/CO0geKF.png" alt=""></p>
+
+<p>The Edit Custom Homework dialog allows for greater flexibility in planning semester homework. Click <strong>Add New</strong> to add a new homework task to the list, and select it to edit it. The <em>Title</em> will appear on homework sheets and checklists, and the <em>Title</em> and <em>Body</em> will appear on syllabuses.</p>
+
+<p>The <strong>Due on week # *<em>field determines the due date of the *first</em> instance of this homework tasks, and the **Repeats every</strong> checkbox adds this homework task once per the value set in the <strong>weeks</strong> box.</p>
+
+<p></p>
+
+<h3>
+<a id="edit-custom-holidays" class="anchor" href="#edit-custom-holidays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit Custom Holidays</h3>
+
+<p><a href="http://i.imgur.com/VsufVgh.png">http://i.imgur.com/VsufVgh.png</a>    </p>
+
+<p>This dialog is fairly straightforward. Click days to mark them as holidays (no class, homework will not be assigned or due), and click again to unmark them. Dates in <strong>bold</strong> are marked holidays. A list of all custom marked holidays is under the <strong>Custom Holidays</strong> tab, and all national and JLS holidays are under the <strong>All Holidays</strong> tab.</p>
+
+<p>This dialog <em>does</em> automatically update its contents, so simply click OK when finished.</p>
+
+<h3>
+<a id="preview-schedule" class="anchor" href="#preview-schedule" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Schedule</h3>
+
+<p>This button will generate a simple text schedule of the semester. Double-check it to ensure that all settings and homework due dates are correct before exporting files.</p>
+
+<h3>
+<a id="export" class="anchor" href="#export" aria-hidden="true"><span class="octicon octicon-link"></span></a>Export</h3>
+
+<p><a href="http://i.imgur.com/yLsriMQ.png">http://i.imgur.com/yLsriMQ.png</a><br>
+The utility's ultimate objective is to produce well-formatted .DOCX (Microsoft Word 2007 or later) files. It should do this pretty much no problem, regardless of whether or not the system has MS Word actually installed. Just hit <strong>Export as .DOCX</strong> and select the destination folder.</p>
+
+<p>If word <em>is</em> installed, the <strong>Export as .DOC</strong> should work without issue.</p>
+
+<p>If Word v15 (Microsoft Office 2013) is installed, any of the experimental output functions should work. I'm currently working on getting these running without the need for a MS Word installation.</p>
+
+<p>In every case, on exporting, the utility will create a folder at the destination titled in the following way:
+</p>
+
+<p>In that folder will be three documents, named similarly but with a prepended <strong>NT, KT</strong> or <strong>STUDENTS</strong></p>
+
+<ul>
+<li>The <strong>NT</strong> file contains a class syllabus, as well as a checklist for each student, containing every homework assignment due for the class, making homework completion tracking very simple.</li>
+<li>The <strong>KT</strong> file contains only a class syllabus - something you can give to the class' KT so they can update the due homework online, if necessary.</li>
+<li>The <strong>STUDENTS</strong> file contains the following three pages, customized for every student in the class:
+
+<ul>
+<li>A class syllabus</li>
+<li>A homework sheet with assignment and due dates, as well as spaces for parent and teacher signatures</li>
+<li>A syllabus with a Korean header, to be brought home so Mom and Dad can stay abreast of their child's JLS work.</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="saving-and-loading" class="anchor" href="#saving-and-loading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Saving and Loading</h3>
+
+<p>Exported documents are saved automatically on creation and require no additional input. Class data, on the other hand, can be saved through <strong>File -&gt; Save Class Data</strong> or the keyboard shortcut <strong>CTRL + S</strong>.</p>
+
+<p>This creates a .JLSC file at the chosen location. These files can be loaded through <strong>File -&gt; Load Class Data - &gt; Load .JLSC File</strong> and edited or exported at a later date.</p>
+
+<p>&lt;.JLSC files are able to be read by the JLS Homework Utility installed on any system. However, if <a href="#json-edit">the utility JSON files are edited</a>, .JLSC files created by other copies of the program may not be able to be read, and vice-versa&gt;</p>
+
+<hr>
 
 <p><a name="jls-excel"></a></p>
 
@@ -69,12 +151,15 @@
 <p>Select Class -&gt; Class Related from the navigation menu on the left:<br>
 <img src="http://i.imgur.com/qaIgOmC.png" alt=""></p>
 
-<p>From there, select the class you'd like to import names from <strong>(1)</strong>, and click the last tab, labeled "내신관러" <strong>(2)</strong>. From this tab, click the "Excel"/"엑셀" button:<br>
-<img src="http://i.imgur.com/lEuvh6F.png" alt="Shouldn't this be &quot;액샐&quot;?"></p>
+<p>From there, select the class you'd like to import names from <strong>(1)</strong>, and click the last tab, labeled "내신관러" <strong>(2)</strong>. From this tab, click the "Excel"/"엑셀" <strong>(3)</strong> button:   </p>
 
-<p>Click "Yes"/"예" from the window that pops up:<br>
-<img src="http://imgur.com/WGqFPPE" alt="">
-Select the download folder, and click "Ok" on the next popup.</p>
+<p><img src="http://i.imgur.com/lEuvh6F.png" alt="Shouldn't this be &quot;액샐&quot;?"></p>
+
+<p>Click "Yes"/"예" from the window that pops up:  </p>
+
+<p><img src="http://i.imgur.com/WGqFPPE" alt=""></p>
+
+<p>Select the download folder, and click "Ok" on the next popup.</p>
 
 <p>Now, open the JLS Homework Utility. From the <strong>File</strong> menu, Select <strong>Load Class -&gt; Load from lpt.gojls .XLS file</strong>. Navigate to where you saved the downloaded file, and select that file. It should have a numeric filename comprised of the year, month, day, and time of the download (something like 2015041519320755.xls / YYYYMMDDHHMMSS###.xls)</p>
 
@@ -98,20 +183,26 @@ Otherwise, this is how you extend the utility:</p>
 <a id="adding-a-new-time" class="anchor" href="#adding-a-new-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Time</h2>
 
 <p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find a text file called <strong>ClassTimes.txt</strong> open that.<br>
-Inside this file, simply add a new line surrounded in quotes to describe your new time. If you're adding the time to the beginning or middle of the list, you'll need to end it with a comma, like this:<br>
-<code>"1:00-2:00",</code><br>
+Inside this file, simply add a new line surrounded in quotes to describe your new time. If you're adding the time to the beginning or middle of the list, you'll need to end it with a comma, like this:   </p>
+
+<blockquote>
+<p>"1:00-2:00",<br>
 But, if you're adding a new time to the end of the list, don't include the comma, like this:<br>
-<code>"9:00-10:00"</code><br>
+   "9:00-10:00"<br>
 Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
 Save the file and open the Homework Utility program. Your new time should appear in the drop-down list.</p>
+</blockquote>
 
 <h2>
 <a id="adding-or-editing-holidays" class="anchor" href="#adding-or-editing-holidays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding or Editing Holidays</h2>
 
 <p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find text files called <strong>JLSHolidays.txt</strong> and <strong>KRHolidays.txt</strong>. Open either, but know that the Homework Utility <a href="#addholiday">already contains a method for adding custom holidays to a class schedule</a>. Edit these to change or add holidays <em>globally</em>.</p>
 
-<p>Inside this file, add a new line in the following format:<br>
-<code>"D/MM/YYYY": "My Custom Holiday",</code>   </p>
+<p>Inside this file, add a new line in the following format:   </p>
+
+<blockquote>
+<p>"D/MM/YYYY": "My Custom Holiday",   </p>
+</blockquote>
 
 <p>Ensure that all entries <strong>except for</strong> the final one end with a comma. Failure to do this will result in the program being unable to understand the data.</p>
 
@@ -121,32 +212,38 @@ Save the file and open the Homework Utility program. Your new time should appear
 <a id="adding-a-new-class-level" class="anchor" href="#adding-a-new-class-level" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Class Level</h2>
 
 <p>In the JLS Homework Utility folder, there is a folder called <strong>Resources</strong>. Open it, and inside you'll find a text file called <strong>ClassLevels.txt</strong> open that.<br>
-Inside this file, simply add a new line surrounded in quotes to describe the new class. If you're adding the class to the beginning or middle of the list, you'll need to end it with a comma, like this:<br>
-<code>"My New Class",</code><br>
+Inside this file, simply add a new line surrounded in quotes to describe the new class. If you're adding the class to the beginning or middle of the list, you'll need to end it with a comma, like this:    </p>
+
+<blockquote>
+<p>"My New Class",<br>
 But, if you're adding a new class to the end of the list, don't include the comma, like this:<br>
-<code>"My New Class"</code><br>
+   "My New Class"<br>
 Add a comma to the previous entry. All entries but the last <em>must</em> end with a comma, or the program will fail to understand the data.
 Save the file and return to the <strong>Resources</strong> folder.  </p>
+</blockquote>
 
 <p>If you <strong>will not use</strong> the <a href="*sthomeworkoptions">automatic Speaking Tree homework generation options</a> for this class, you can use the program normally, just know that if you try to use those options with this new class, schedule generation will fail. Otherwise, you'll have to add a class book, as described below:</p>
 
 <h2>
 <a id="adding-a-new-book" class="anchor" href="#adding-a-new-book" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding a new Book</h2>
 
-<p>In the <strong>Resources</strong> folder, the <strong>Books.txt</strong> file contains book data, and the syntax is as follows:<br>
-<code>{</code><br>
-<code>"Title": "My Class Name (must be the same as the entry in ClassLevels.txt",</code><br>
-<code>"Units": {</code><br>
-<code>"1": "Unit 1 Title",</code><br>
-<code>"2": "Unit 2 Title",</code><br>
-<code>"3": "Unit 3 Title",</code><br>
-<code>"4": "Unit 4 Title",</code><br>
-<code>"5": "Unit 5 Title",</code><br>
-<code>"6": "Unit 6 Title",</code><br>
-<code>"7": "Unit 7 Title",</code><br>
-<code>"8": "Unit 8 Title"</code><br>
-<code>}</code><br>
-<code>},</code>  </p>
+<p>In the <strong>Resources</strong> folder, the <strong>Books.txt</strong> file contains book data, and the syntax is as follows:  </p>
+
+<blockquote>
+<p>{<br>
+       "Title": "My Class Name (must be the same as the entry in ClassLevels.txt",<br>
+       "Units": {<br>
+           "1": "Unit 1 Title",<br>
+           "2": "Unit 2 Title",<br>
+           "3": "Unit 3 Title",<br>
+           "4": "Unit 4 Title",<br>
+           "5": "Unit 5 Title",<br>
+           "6": "Unit 6 Title",<br>
+           "7": "Unit 7 Title",<br>
+           "8": "Unit 8 Title"<br>
+       }<br>
+   },  </p>
+</blockquote>
 
 <p>Once again, every entry must terminate in a comma except for the final entry.
 After adding the book for your new class, the program should be able to generate automatic homework lists for your class. </p>
