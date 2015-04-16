@@ -14,14 +14,6 @@ a {
   text-decoration: none; }
   a:hover {
     text-decoration: underline; }
-    
-.pImg {
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px #aaaaaa;
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
 
 .btn {
   display: inline-block;
