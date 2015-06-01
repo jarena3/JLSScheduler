@@ -129,8 +129,8 @@ namespace JLSScheduler
                 t.Alignment = Alignment.center;
 
                 //add content
-                t.Rows[0].Cells[0].Paragraphs.First().Append("Date Assigned").Bold().FontSize(9);
-                t.Rows[0].Cells[1].Paragraphs.First().Append("Date Due").Bold().FontSize(9);
+                t.Rows[0].Cells[0].Paragraphs.First().Append("Date Assigned").Bold().FontSize(6);
+                t.Rows[0].Cells[1].Paragraphs.First().Append("Date Due").Bold().FontSize(6);
                 t.Rows[0].Cells[2].Paragraphs.First().Append("Assignment").Bold().FontSize(9);
                 t.Rows[0].Cells[3].Paragraphs.First().Append("Parent Signature").Bold().FontSize(9);
                 t.Rows[0].Cells[4].Paragraphs.First().Append("Teacher Signature").Bold().FontSize(9);
@@ -139,7 +139,7 @@ namespace JLSScheduler
                 t.Rows[1].Cells[2].Paragraphs.First().Append(weeklyHomework).FontSize(7);
 
                 //size the columns
-                float space = doc.PageWidth - doc.MarginLeft - doc.MarginRight;
+                float space = (doc.PageWidth - doc.MarginLeft - doc.MarginRight) * 0.9f;
 
                 
 
