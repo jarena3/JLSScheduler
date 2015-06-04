@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+
 
 namespace JLSScheduler
 {
@@ -15,9 +11,10 @@ namespace JLSScheduler
 
         public List<Tuple<string, string>> studentList;
 
+        public string classLevel;
         public int classLevelIndex;
         public int classDayIndex;
-        public int classTimeIndex;
+        public DateTime classTime;
 
         public DateTime semesterStart;
         public DateTime semesterEnd;

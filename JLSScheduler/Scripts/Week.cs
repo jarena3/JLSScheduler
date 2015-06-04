@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 
 namespace JLSScheduler
 {
@@ -29,10 +26,10 @@ namespace JLSScheduler
         /// </summary>
         public Week(DateTime date, string holidayName)
         {
-            this.DateTime = date;
-            this.HomeworkList = new List<HomeworkTask>();
-            this.IsHoliday = true;
-            this._holidayName = holidayName;
+            DateTime = date;
+            HomeworkList = new List<HomeworkTask>();
+            IsHoliday = true;
+            _holidayName = holidayName;
         }
 
         /// <summary>
@@ -40,8 +37,8 @@ namespace JLSScheduler
         /// </summary>
         public Week(DateTime date, bool firstPresentation)
         {
-            this.DateTime = date;
-            this.HomeworkList = new List<HomeworkTask>();
+            DateTime = date;
+            HomeworkList = new List<HomeworkTask>();
             PresentationNumber = firstPresentation ? 1 : 2;
 
         }
@@ -87,11 +84,7 @@ namespace JLSScheduler
         public override string ToString()
         {
             string output = Title + Environment.NewLine + Subtitle + Environment.NewLine;
-            foreach (HomeworkTask hw in HomeworkList)
-            {
-                output += hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine;
-            }
-            return output;
+            return HomeworkList.Aggregate(output, (current, hw) => current + (hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine));
         }
     }
 }

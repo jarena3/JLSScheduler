@@ -1,94 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JLSScheduler.Forms
 {
     public partial class CustomHolidayForm : Form
     {
-        private Main main;
-        private Dictionary<DateTime, string> customHolidays; 
+        private readonly Main _main;
+        private Dictionary<DateTime, string> _customHolidays;
+        private List<DateTime> _allHolidays; 
 
         public CustomHolidayForm(Main m)
         {
             InitializeComponent();
-            main = m;
+            _main = m;
             Init();
         }
 
         private void Init()
         {
-            Calendar.MinDate = main.LoadedClassData.semesterStart;
-            Calendar.MaxDate = main.LoadedClassData.semesterEnd;
+            Calendar.MinDate = _main.LoadedClassData.semesterStart;
+            Calendar.MaxDate = _main.LoadedClassData.semesterEnd;
 
-            customHolidays = main.LoadedClassData.customHolidaysList;
+            _customHolidays = _main.LoadedClassData.customHolidaysList;
 
-            List<string> holidays = new List<string>();
+            _allHolidays = new List<DateTime>();
+            var holidays = new List<string>();
 
-            foreach (var kvp in ScheduleBuilder.Holidays)
+            foreach (var kvp in ScheduleBuilder.Holidays.Where(kvp => IsDateWithinRange(kvp.Key)))
             {
-                if (IsDateWithinRange(kvp.Key))
-                {
-                    holidays.Add(string.Format("{0} - {1}", kvp.Key.ToShortDateString(), kvp.Value));
-                }
+                holidays.Add(string.Format("{0} - {1}", kvp.Key.ToShortDateString(), kvp.Value));
+                _allHolidays.Add(kvp.Key);
             }
 
             AllHolidaysListBox.Items.AddRange(holidays.ToArray());
             UpdateCustomHolidayListBox();
-            MarkAllBold();
         }
 
         private bool IsDateWithinRange (DateTime candidate)
         {
-            if (candidate > Calendar.MinDate && candidate < Calendar.MaxDate)
-            {
-                return true;
-            }
-            return false;
+            return candidate > Calendar.MinDate && candidate < Calendar.MaxDate;
         }
-
 
 
         private void Calendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             var selection = Calendar.SelectionStart;
 
-            if (customHolidays.Keys.Contains(selection))
+            if (_customHolidays.Keys.Contains(selection))
             {
-                customHolidays.Remove(selection);
+                _customHolidays.Remove(selection);
+                _allHolidays.Remove(selection);
             }
             else if (!ScheduleBuilder.Holidays.Keys.Contains(selection))
             {
-                customHolidays.Add(selection, "No Class");
+                _customHolidays.Add(selection, "No Class");
+                _allHolidays.Add(selection);
             }
             UpdateCustomHolidayListBox();
+            MarkAllBold();
         }
 
         private void UpdateCustomHolidayListBox()
         {
             CustomHolidaysListBox.Items.Clear();
-            string[] s = customHolidays.Keys.Select(a => a.ToShortDateString()).ToArray();
+            var s = _customHolidays.Keys.Select(a => a.ToShortDateString()).ToArray();
 
             CustomHolidaysListBox.Items.AddRange(s);
-            MarkAllBold();
         }
 
         private void MarkAllBold()
         {
-            var allDates = ScheduleBuilder.Holidays.Keys.Concat(customHolidays.Keys).ToArray();
-            Calendar.BoldedDates = allDates;
+            Calendar.BeginInvoke(new MethodInvoker(CalendarMarkWorkaround));
+        }
+
+        private void CalendarMarkWorkaround()
+        {
+            Calendar.BoldedDates = _allHolidays.ToArray();  
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            main.LoadedClassData.customHolidaysList = customHolidays;
-            this.Close();
+            _main.LoadedClassData.customHolidaysList = _customHolidays;
+            Close();
         }
     }
 }

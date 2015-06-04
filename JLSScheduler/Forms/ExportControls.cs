@@ -44,7 +44,7 @@ namespace JLSScheduler.Forms
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var path = dialog.SelectedPath;
-                    DOCExportWriter.WriteToDOC(_main.LoadedClassData,
+                    DocExportWriter.WriteToDoc(_main.LoadedClassData,
                         ScheduleBuilder.BuildWeeksList(_main.LoadedClassData), path);
                     MessageBox.Show("Documents created successfully !");
                 }
@@ -97,7 +97,7 @@ namespace JLSScheduler.Forms
                     Directory.CreateDirectory(Path.Combine(dialog.SelectedPath,
                         classDayString + "_" + classTimeString));
 
-                var tpath = DOCExportWriter.WriteToDOC(_main.LoadedClassData,
+                var tpath = DocExportWriter.WriteToDoc(_main.LoadedClassData,
                     ScheduleBuilder.BuildWeeksList(_main.LoadedClassData), Path.GetTempPath());
 
                 //wait a moment for windows to close the filestream
@@ -127,7 +127,7 @@ namespace JLSScheduler.Forms
                         winword.Visible = false;
 
                         //Create a new document
-                        Microsoft.Office.Interop.Word.Document document = winword.Documents.Open(f.FullName);
+                        Document document = winword.Documents.Open(f.FullName);
 
                         //Save the document
                         var rawFilename = f.ToString().Substring(0, f.ToString().Length - 5);

@@ -91,12 +91,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.ClassLevelComboBox = new System.Windows.Forms.ComboBox();
             this.ClassDayComboBox = new System.Windows.Forms.ComboBox();
-            this.ClassTimeComboBox = new System.Windows.Forms.ComboBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openJLSCFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openXLSFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.IgnoreKRHolidaysCB = new System.Windows.Forms.CheckBox();
             this.IgnoreJLSHolidaysCB = new System.Windows.Forms.CheckBox();
+            this.ClassTimePicker = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.TweaksPanel.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -706,7 +706,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(99, 309);
+            this.label14.Location = new System.Drawing.Point(98, 309);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(33, 13);
             this.label14.TabIndex = 28;
@@ -715,6 +715,20 @@
             // ClassLevelComboBox
             // 
             this.ClassLevelComboBox.FormattingEnabled = true;
+            this.ClassLevelComboBox.Items.AddRange(new object[] {
+            "DSC-1",
+            "DSC-2",
+            "DSD-1",
+            "DSD-2",
+            "LSA-1",
+            "LSA-2",
+            "LSB-1",
+            "LSB-2",
+            "LSC-1",
+            "LSC-2",
+            "LSD-1",
+            "LSD-2",
+            "OTHER"});
             this.ClassLevelComboBox.Location = new System.Drawing.Point(79, 279);
             this.ClassLevelComboBox.Name = "ClassLevelComboBox";
             this.ClassLevelComboBox.Size = new System.Drawing.Size(128, 21);
@@ -723,19 +737,16 @@
             // ClassDayComboBox
             // 
             this.ClassDayComboBox.FormattingEnabled = true;
+            this.ClassDayComboBox.Items.AddRange(new object[] {
+            "MON",
+            "TUE",
+            "WED",
+            "THUR",
+            "FRI"});
             this.ClassDayComboBox.Location = new System.Drawing.Point(43, 306);
             this.ClassDayComboBox.Name = "ClassDayComboBox";
             this.ClassDayComboBox.Size = new System.Drawing.Size(50, 21);
             this.ClassDayComboBox.TabIndex = 30;
-            this.ClassDayComboBox.SelectedIndexChanged += new System.EventHandler(this.SetDayTimeRange);
-            // 
-            // ClassTimeComboBox
-            // 
-            this.ClassTimeComboBox.FormattingEnabled = true;
-            this.ClassTimeComboBox.Location = new System.Drawing.Point(138, 306);
-            this.ClassTimeComboBox.Name = "ClassTimeComboBox";
-            this.ClassTimeComboBox.Size = new System.Drawing.Size(69, 21);
-            this.ClassTimeComboBox.TabIndex = 31;
             // 
             // saveFileDialog
             // 
@@ -776,15 +787,25 @@
             this.IgnoreJLSHolidaysCB.Text = "Ignore JLS Holidays";
             this.IgnoreJLSHolidaysCB.UseVisualStyleBackColor = true;
             // 
+            // ClassTimePicker
+            // 
+            this.ClassTimePicker.CustomFormat = "\"hh:mm\"";
+            this.ClassTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.ClassTimePicker.Location = new System.Drawing.Point(137, 306);
+            this.ClassTimePicker.Name = "ClassTimePicker";
+            this.ClassTimePicker.ShowUpDown = true;
+            this.ClassTimePicker.Size = new System.Drawing.Size(69, 20);
+            this.ClassTimePicker.TabIndex = 34;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(824, 496);
+            this.Controls.Add(this.ClassTimePicker);
             this.Controls.Add(this.IgnoreJLSHolidaysCB);
             this.Controls.Add(this.IgnoreKRHolidaysCB);
-            this.Controls.Add(this.ClassTimeComboBox);
             this.Controls.Add(this.ClassDayComboBox);
             this.Controls.Add(this.ClassLevelComboBox);
             this.Controls.Add(this.label14);
@@ -901,12 +922,12 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox ClassLevelComboBox;
         private System.Windows.Forms.ComboBox ClassDayComboBox;
-        private System.Windows.Forms.ComboBox ClassTimeComboBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openJLSCFileDialog;
         private System.Windows.Forms.OpenFileDialog openXLSFileDialog;
         private System.Windows.Forms.CheckBox IgnoreKRHolidaysCB;
         private System.Windows.Forms.CheckBox IgnoreJLSHolidaysCB;
+        private System.Windows.Forms.DateTimePicker ClassTimePicker;
     }
 }
 

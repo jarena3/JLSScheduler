@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using JLSScheduler.Forms;
 using Newtonsoft.Json;
@@ -23,10 +19,7 @@ namespace JLSScheduler
         #region init
         public Main()
         {
-            //lock these to en-US
-            //allowing system culture seems to cause problems with DocX
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             InitializeComponent();
@@ -36,13 +29,11 @@ namespace JLSScheduler
 
         private void MainLoad(object sender, EventArgs e)
         {
+ 
             LoadedClassData = new ClassData();
 
-            //load class selection data from JSON
-            ClassLevelComboBox.Items.AddRange(LSClasses.Classes());
-                ClassLevelComboBox.SelectedIndex = 0;
-            ClassDayComboBox.Items.AddRange(LSClasses.ClassDays);
-                ClassDayComboBox.SelectedIndex = 0;
+            ClassLevelComboBox.SelectedIndex = 0;
+            ClassDayComboBox.SelectedIndex = 0;
 
             //create new lists for custom homework and holidays
             LoadedClassData.customHomeworkList = new List<HomeworkTask>();
@@ -50,26 +41,6 @@ namespace JLSScheduler
 
         }
 
-
-
-        private void SetDayTimeRange(object sender, EventArgs e)
-        {
-            ClassTimeComboBox.Items.Clear();
-
-            var i = ClassDayComboBox.SelectedIndex;
-            if (i == 1 || i == 3 || i == 5)
-            {
-                ClassTimeComboBox.Items.AddRange(LSClasses.TRTimes());
-            }
-            else
-            {
-                ClassTimeComboBox.Items.AddRange(LSClasses.MWFTimes());
-            }
-            ClassTimeComboBox.SelectedIndex = 0;
-            LoadedClassData.classTimeIndex = 0;
-            LoadedClassData.classDayIndex = ClassDayComboBox.SelectedIndex;
-            LoadedClassData.classTimeString = ClassTimeComboBox.SelectedText;
-        }
         #endregion
 
         #region menuStrip
@@ -217,7 +188,7 @@ namespace JLSScheduler
             StudentListBox.Items.AddRange(LoadedClassData.studentList.ToArray());
             UpdateStudentCount();
             ClassLevelComboBox.SelectedIndex = LoadedClassData.classLevelIndex;
-            ClassTimeComboBox.SelectedIndex = LoadedClassData.classTimeIndex;
+            ClassTimePicker.Value = LoadedClassData.classTime;
             ClassDayComboBox.SelectedIndex = LoadedClassData.classDayIndex;
             SemesterStartPicker.Value = LoadedClassData.semesterStart;
             SemesterEndPicker.Value = LoadedClassData.semesterEnd;
@@ -248,8 +219,9 @@ namespace JLSScheduler
             LoadedClassData.NTname = NTNameBox.Text;
             LoadedClassData.KTname = KTNameBox.Text;
             LoadedClassData.classLevelIndex = ClassLevelComboBox.SelectedIndex;
+            LoadedClassData.classLevel = ClassLevelComboBox.SelectedText;
             LoadedClassData.classDayIndex = ClassDayComboBox.SelectedIndex;
-            LoadedClassData.classTimeIndex = ClassTimeComboBox.SelectedIndex;
+            LoadedClassData.classTime = ClassTimePicker.Value;
             LoadedClassData.semesterStart = SemesterStartPicker.Value;
             LoadedClassData.semesterEnd = SemesterEndPicker.Value;
             LoadedClassData.ignoreKoreanHolidays = IgnoreKRHolidaysCB.Checked;
@@ -272,7 +244,7 @@ namespace JLSScheduler
             LoadedClassData.secondPresentationCustomReq = SecondPresentationCustomReqCB.Checked;
             LoadedClassData.secondPresentationCustomText = SecondPresentationCustomReqTB.Text;
             LoadedClassData.endOfSemesterReviewDays = ReviewCB.Checked;
-            LoadedClassData.classTimeString = ClassTimeComboBox.Items[LoadedClassData.classTimeIndex].ToString();
+            LoadedClassData.classTimeString = ClassTimePicker.Value.ToShortTimeString();
         }
 
 
