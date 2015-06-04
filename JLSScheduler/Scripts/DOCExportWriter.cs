@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Novacode;
 
 namespace JLSScheduler
@@ -20,10 +27,7 @@ namespace JLSScheduler
             _classDayString = ScheduleBuilder.GetWeekday(cd.classDayIndex).ToString();
             _classLevelString = cd.classLevel;
 
-            _classTimeString = new string((from c in cd.classTimeString
-                where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
-                select c
-                ).ToArray()).Insert(3, "_");
+            _classTimeString = cd.classTimeString;
 
             var folder = Directory.CreateDirectory(savePath + "/" + _classDayString + "_" +
                                                    _classTimeString);
@@ -62,6 +66,7 @@ namespace JLSScheduler
                 DocX doc =
                     DocX.Create(folder.FullName + "/KT_" + _classDayString + "_" + _classLevelString + "_" +
                                 _classTimeString + "_" + ".docx"))
+
             {
                 WriteTeacherHeader(doc, cd, string.Empty);
                 WriteSyllabusSection(doc, weeks, string.Empty);
@@ -76,6 +81,7 @@ namespace JLSScheduler
                 DocX doc =
                     DocX.Create(folder.FullName + "/STUDENTS_" + _classDayString + "_" + _classLevelString + "_" +
                                 _classTimeString + "_" + ".docx"))
+
             {
 
                 foreach (var s in cd.studentList)
@@ -84,6 +90,7 @@ namespace JLSScheduler
                     doc.InsertSectionPageBreak();
 
                     WriteStudentHomeworkSheet(doc, weeks);
+
                     doc.InsertSectionPageBreak();
 
                     WriteParentSchedule(doc, cd, weeks, s);
@@ -105,6 +112,7 @@ namespace JLSScheduler
         }
 
         private static void WriteStudentHomeworkSheet(DocX doc, List<Week> weeks)
+
         {
             for (int i = 0; i < weeks.Count; i++)
             {
@@ -119,6 +127,7 @@ namespace JLSScheduler
                 }
 
                 Table t = doc.AddTable(2, 5);
+
 
                 t.Alignment = Alignment.center;
 
@@ -135,6 +144,7 @@ namespace JLSScheduler
                 //size the columns
                 var space = (doc.PageWidth - doc.MarginLeft - doc.MarginRight) * 0.9f;
                 
+
                 t.Rows[0].Cells[0].Width = Math.Round(0.08 * space);
                 t.Rows[1].Cells[0].Width = Math.Round(0.08 * space);
 
@@ -161,6 +171,7 @@ namespace JLSScheduler
             Paragraph p1 = doc.InsertParagraph();
 
             var name = !string.IsNullOrEmpty(tuple.Item2) ? tuple.Item2 : tuple.Item1;
+
 
             p1.Append(string.Format("안녕하세요.{0}" +
                                     "아래의 표는{1}부터 {2}까지 JLS의 네이티브 선생님 수업을 듣는 여러분의 자녀들을 위해 만들어진 과제 일람표입니다.{0}" +
@@ -203,6 +214,7 @@ namespace JLSScheduler
         {
             Paragraph p1 = doc.InsertParagraph();
             p1.Append(string.Format("{0}, {1} : {2}", _classDayString, cd.classTimeString, _classLevelString))
+
                 .FontSize(14)
                 .Bold();
             p1.Append(Environment.NewLine);
@@ -237,6 +249,7 @@ namespace JLSScheduler
             Paragraph p2 = doc.InsertParagraph();
 
             p2.Append(string.Format("{0}'s Class, {1} at {2}", cd.NTname, _classDayString, cd.classTimeString))
+
                 .FontSize(14)
                 .Bold();
             p2.Append(Environment.NewLine);
@@ -335,6 +348,7 @@ namespace JLSScheduler
                     else
                     {
                         estrings.Add(s.PadRight(TableStringLength));
+
                     }
                 }
 
@@ -360,6 +374,7 @@ namespace JLSScheduler
         }
 
         #endregion
+
     }
     }
 

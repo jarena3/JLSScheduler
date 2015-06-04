@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace JLSScheduler
 {
     /// <summary>
@@ -30,6 +31,7 @@ namespace JLSScheduler
             HomeworkList = new List<HomeworkTask>();
             IsHoliday = true;
             _holidayName = holidayName;
+
         }
 
         /// <summary>
@@ -85,6 +87,7 @@ namespace JLSScheduler
         {
             string output = Title + Environment.NewLine + Subtitle + Environment.NewLine;
             return HomeworkList.Aggregate(output, (current, hw) => current + (hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine));
+
         }
     }
 }

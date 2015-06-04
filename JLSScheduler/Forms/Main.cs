@@ -20,6 +20,7 @@ namespace JLSScheduler
         public Main()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace JLSScheduler
             LoadedClassData.customHolidaysList = new Dictionary<DateTime, string>();
 
         }
+
 
         #endregion
 
@@ -245,6 +247,7 @@ namespace JLSScheduler
             LoadedClassData.secondPresentationCustomText = SecondPresentationCustomReqTB.Text;
             LoadedClassData.endOfSemesterReviewDays = ReviewCB.Checked;
             LoadedClassData.classTimeString = ClassTimePicker.Value.ToShortTimeString();
+
         }
 
 
