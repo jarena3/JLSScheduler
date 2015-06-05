@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using JLSScheduler.Forms;
+using LinqToExcel;
 using Newtonsoft.Json;
 
 namespace JLSScheduler
@@ -17,6 +18,7 @@ namespace JLSScheduler
         public ClassData LoadedClassData;
 
         #region init
+
         public Main()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -30,25 +32,28 @@ namespace JLSScheduler
 
         private void MainLoad(object sender, EventArgs e)
         {
- 
             LoadedClassData = new ClassData();
 
             ClassLevelComboBox.SelectedIndex = 0;
             ClassDayComboBox.SelectedIndex = 0;
 
             //create new lists for custom homework and holidays
-            LoadedClassData.customHomeworkList = new List<HomeworkTask>();
-            LoadedClassData.customHolidaysList = new Dictionary<DateTime, string>();
+            LoadedClassData.CustomHomeworkList = new List<HomeworkTask>();
+            LoadedClassData.CustomHolidaysList = new Dictionary<DateTime, string>();
+
+            ClassTimePicker.Format = DateTimePickerFormat.Custom;
+            ClassTimePicker.CustomFormat = "HH:mm";
+            ClassTimePicker.ShowUpDown = true;
 
         }
-
 
         #endregion
 
         #region menuStrip
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (AboutBox dialog = new AboutBox())
+            using (var dialog = new AboutBox())
             {
                 dialog.ShowDialog();
             }
@@ -62,7 +67,7 @@ namespace JLSScheduler
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            var path = saveFileDialog.FileName;
+            string path = saveFileDialog.FileName;
 
             File.WriteAllText(path, JsonConvert.SerializeObject(LoadedClassData));
         }
@@ -74,7 +79,7 @@ namespace JLSScheduler
 
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            var path = openJLSCFileDialog.FileName;
+            string path = openJLSCFileDialog.FileName;
             try
             {
                 LoadedClassData = JsonConvert.DeserializeObject<ClassData>(File.ReadAllText(path));
@@ -82,7 +87,12 @@ namespace JLSScheduler
             }
             catch (Exception)
             {
-                //TODO: add exception handling... all over...
+                MessageBox.Show(
+                    "This file is of the wrong type, corrupted, or malformed. Class data cannot be constructed from this file.",
+                    "ERROR",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -99,18 +109,18 @@ namespace JLSScheduler
 
         private void openXLSFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            var path = Path.GetFullPath(openXLSFileDialog.FileName);
+            string path = Path.GetFullPath(openXLSFileDialog.FileName);
 
-            var classXLS = new LinqToExcel.ExcelQueryFactory(path);
+            var classXls = new ExcelQueryFactory(path);
 
-            var studentsKRnames = from c in classXLS.Worksheet(0)
-                                  select c["학생"];
+            IQueryable<Cell> studentsKRnames = from c in classXls.Worksheet(0)
+                select c["학생"];
 
-            LoadedClassData.studentList = new List<Tuple<string, string>>();
+            LoadedClassData.StudentList = new List<Tuple<string, string>>();
 
-            foreach (var s in studentsKRnames)
+            foreach (Cell s in studentsKRnames)
             {
-                LoadedClassData.studentList.Add(new Tuple<string, string>("", s.ToString()));
+                LoadedClassData.StudentList.Add(new Tuple<string, string>("", s.ToString()));
             }
 
             ReInitClass();
@@ -122,33 +132,32 @@ namespace JLSScheduler
 
         private void StudentListAddButton_Click(object sender, EventArgs e)
         {
-            using (AddStudentForm dialog = new AddStudentForm())
+            using (var dialog = new AddStudentForm())
             {
-               DialogResult result = dialog.ShowDialog();
+                DialogResult result = dialog.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
                     var s = new Tuple<string, string>(dialog.EnglishNameText, dialog.KoreanNameText);
-                    LoadedClassData.studentList.Add(s);
+                    LoadedClassData.StudentList.Add(s);
                     StudentListBox.Items.Add(s);
                     UpdateStudentCount();
                 }
-
             }
         }
 
         private void StudentListEditButton_Click(object sender, EventArgs e)
         {
-            var i = StudentListBox.SelectedIndex;
+            int i = StudentListBox.SelectedIndex;
 
             if (i > -1)
             {
-                using (AddStudentForm dialog = new AddStudentForm())
+                using (var dialog = new AddStudentForm())
                 {
                     dialog.Text = "Edit Student";
                     dialog.AddButton.Text = "Edit";
-                    dialog.EnglishName.Text = LoadedClassData.studentList[i].Item1;
-                    dialog.KoreanName.Text = LoadedClassData.studentList[i].Item2;
+                    dialog.EnglishName.Text = LoadedClassData.StudentList[i].Item1;
+                    dialog.KoreanName.Text = LoadedClassData.StudentList[i].Item2;
 
 
                     DialogResult result = dialog.ShowDialog();
@@ -156,21 +165,20 @@ namespace JLSScheduler
                     if (result == DialogResult.OK)
                     {
                         var s = new Tuple<string, string>(dialog.EnglishNameText, dialog.KoreanNameText);
-                        LoadedClassData.studentList[i] = s;
+                        LoadedClassData.StudentList[i] = s;
                         StudentListBox.Items[i] = s;
                     }
-
                 }
             }
         }
 
         private void StudentListRemoveButton_Click(object sender, EventArgs e)
         {
-            var i = StudentListBox.SelectedIndex;
+            int i = StudentListBox.SelectedIndex;
 
             if (i > -1)
             {
-                LoadedClassData.studentList.RemoveAt(i);
+                LoadedClassData.StudentList.RemoveAt(i);
                 StudentListBox.Items.RemoveAt(i);
                 UpdateStudentCount();
             }
@@ -180,6 +188,7 @@ namespace JLSScheduler
         {
             ClassCount.Text = "Count: " + StudentListBox.Items.Count;
         }
+
         #endregion
 
         private void ReInitClass()
@@ -187,69 +196,67 @@ namespace JLSScheduler
             NTNameBox.Text = LoadedClassData.NTname;
             KTNameBox.Text = LoadedClassData.KTname;
             StudentListBox.Items.Clear();
-            StudentListBox.Items.AddRange(LoadedClassData.studentList.ToArray());
+            StudentListBox.Items.AddRange(LoadedClassData.StudentList.ToArray());
             UpdateStudentCount();
-            ClassLevelComboBox.SelectedIndex = LoadedClassData.classLevelIndex;
-            ClassTimePicker.Value = LoadedClassData.classTime;
-            ClassDayComboBox.SelectedIndex = LoadedClassData.classDayIndex;
-            SemesterStartPicker.Value = LoadedClassData.semesterStart;
-            SemesterEndPicker.Value = LoadedClassData.semesterEnd;
-            IgnoreKRHolidaysCB.Checked = LoadedClassData.ignoreKoreanHolidays;
-            IgnoreJLSHolidaysCB.Checked = LoadedClassData.ignoreJLSHolidays;
-            WeeklyReadingCB.Checked = LoadedClassData.weeklyReading;
-            WeeklyReadingCT.Value = LoadedClassData.weeklyReadingCount;
-            WeeklyListeningCB.Checked = LoadedClassData.weeklyListening;
-            WeeklyListeningCT.Value = LoadedClassData.weeklyListeningCount;
-            WeeklyRecitationCB.Checked = LoadedClassData.weeklyRecitation;
-            WeeklyRecitationCT.Value = LoadedClassData.weeklyRecitationCount;
-            WeeklyCustomCB.Checked = LoadedClassData.weeklyCustom;
-            WeeklyCustomCT.Value = LoadedClassData.weeklyCustomCount;
-            WeeklyCustomTB.Text = LoadedClassData.weeklyCustomText;
-            FirstPresentationCB.Checked = LoadedClassData.firstPresentation;
-            FirstPresentationFreeTopicCB.Checked = LoadedClassData.firstPresentationFreeTopic;
-            FirstPresentationCustomReqCB.Checked = LoadedClassData.firstPresentationCustomReq;
-            FirstPresentationCustomReqTB.Text = LoadedClassData.firstPresentationCustomText;
-            SecondPresentationCB.Checked = LoadedClassData.secondPresentation;
-            SecondPresentationFreeTopicCB.Checked = LoadedClassData.secondPresentationFreeTopic;
-            SecondPresentationCustomReqCB.Checked = LoadedClassData.secondPresentationCustomReq;
-            SecondPresentationCustomReqTB.Text = LoadedClassData.secondPresentationCustomText;
-            ReviewCB.Checked = LoadedClassData.endOfSemesterReviewDays;
+            ClassLevelComboBox.SelectedIndex = LoadedClassData.ClassLevelIndex;
+            ClassTimePicker.Value = LoadedClassData.ClassTime;
+            ClassDayComboBox.SelectedIndex = LoadedClassData.ClassDayIndex;
+            SemesterStartPicker.Value = LoadedClassData.SemesterStart;
+            SemesterEndPicker.Value = LoadedClassData.SemesterEnd;
+            IgnoreKRHolidaysCB.Checked = LoadedClassData.IgnoreKoreanHolidays;
+            IgnoreJLSHolidaysCB.Checked = LoadedClassData.IgnoreJlsHolidays;
+            WeeklyReadingCB.Checked = LoadedClassData.WeeklyReading;
+            WeeklyReadingCT.Value = LoadedClassData.WeeklyReadingCount;
+            WeeklyListeningCB.Checked = LoadedClassData.WeeklyListening;
+            WeeklyListeningCT.Value = LoadedClassData.WeeklyListeningCount;
+            WeeklyRecitationCB.Checked = LoadedClassData.WeeklyRecitation;
+            WeeklyRecitationCT.Value = LoadedClassData.WeeklyRecitationCount;
+            WeeklyCustomCB.Checked = LoadedClassData.WeeklyCustom;
+            WeeklyCustomCT.Value = LoadedClassData.WeeklyCustomCount;
+            WeeklyCustomTB.Text = LoadedClassData.WeeklyCustomText;
+            FirstPresentationCB.Checked = LoadedClassData.FirstPresentation;
+            FirstPresentationFreeTopicCB.Checked = LoadedClassData.FirstPresentationFreeTopic;
+            FirstPresentationCustomReqCB.Checked = LoadedClassData.FirstPresentationCustomReq;
+            FirstPresentationCustomReqTB.Text = LoadedClassData.FirstPresentationCustomText;
+            SecondPresentationCB.Checked = LoadedClassData.SecondPresentation;
+            SecondPresentationFreeTopicCB.Checked = LoadedClassData.SecondPresentationFreeTopic;
+            SecondPresentationCustomReqCB.Checked = LoadedClassData.SecondPresentationCustomReq;
+            SecondPresentationCustomReqTB.Text = LoadedClassData.SecondPresentationCustomText;
+            ReviewCB.Checked = LoadedClassData.EndOfSemesterReviewDays;
         }
 
         private void StoreClassData()
         {
             LoadedClassData.NTname = NTNameBox.Text;
             LoadedClassData.KTname = KTNameBox.Text;
-            LoadedClassData.classLevelIndex = ClassLevelComboBox.SelectedIndex;
-            LoadedClassData.classLevel = ClassLevelComboBox.SelectedText;
-            LoadedClassData.classDayIndex = ClassDayComboBox.SelectedIndex;
-            LoadedClassData.classTime = ClassTimePicker.Value;
-            LoadedClassData.semesterStart = SemesterStartPicker.Value;
-            LoadedClassData.semesterEnd = SemesterEndPicker.Value;
-            LoadedClassData.ignoreKoreanHolidays = IgnoreKRHolidaysCB.Checked;
-            LoadedClassData.ignoreJLSHolidays = IgnoreJLSHolidaysCB.Checked;
-            LoadedClassData.weeklyReading = WeeklyReadingCB.Checked;
-            LoadedClassData.weeklyReadingCount = (int) WeeklyReadingCT.Value;
-            LoadedClassData.weeklyListening = WeeklyListeningCB.Checked;
-            LoadedClassData.weeklyListeningCount = (int) WeeklyListeningCT.Value;
-            LoadedClassData.weeklyRecitation = WeeklyRecitationCB.Checked;
-            LoadedClassData.weeklyRecitationCount = (int) WeeklyRecitationCT.Value;
-            LoadedClassData.weeklyCustom = WeeklyCustomCB.Checked;
-            LoadedClassData.weeklyCustomCount = (int) WeeklyCustomCT.Value;
-            LoadedClassData.weeklyCustomText = WeeklyCustomTB.Text;
-            LoadedClassData.firstPresentation = FirstPresentationCB.Checked;
-            LoadedClassData.firstPresentationFreeTopic = FirstPresentationFreeTopicCB.Checked;
-            LoadedClassData.firstPresentationCustomReq = FirstPresentationCustomReqCB.Checked;
-            LoadedClassData.firstPresentationCustomText = FirstPresentationCustomReqTB.Text;
-            LoadedClassData.secondPresentation = SecondPresentationCB.Checked;
-            LoadedClassData.secondPresentationFreeTopic = SecondPresentationFreeTopicCB.Checked;
-            LoadedClassData.secondPresentationCustomReq = SecondPresentationCustomReqCB.Checked;
-            LoadedClassData.secondPresentationCustomText = SecondPresentationCustomReqTB.Text;
-            LoadedClassData.endOfSemesterReviewDays = ReviewCB.Checked;
-            LoadedClassData.classTimeString = ClassTimePicker.Value.ToShortTimeString();
-
+            LoadedClassData.ClassLevelIndex = ClassLevelComboBox.SelectedIndex;
+            LoadedClassData.ClassLevel = ClassLevelComboBox.Text;
+            LoadedClassData.ClassDayIndex = ClassDayComboBox.SelectedIndex;
+            LoadedClassData.ClassTime = ClassTimePicker.Value;
+            LoadedClassData.SemesterStart = SemesterStartPicker.Value;
+            LoadedClassData.SemesterEnd = SemesterEndPicker.Value;
+            LoadedClassData.IgnoreKoreanHolidays = IgnoreKRHolidaysCB.Checked;
+            LoadedClassData.IgnoreJlsHolidays = IgnoreJLSHolidaysCB.Checked;
+            LoadedClassData.WeeklyReading = WeeklyReadingCB.Checked;
+            LoadedClassData.WeeklyReadingCount = (int) WeeklyReadingCT.Value;
+            LoadedClassData.WeeklyListening = WeeklyListeningCB.Checked;
+            LoadedClassData.WeeklyListeningCount = (int) WeeklyListeningCT.Value;
+            LoadedClassData.WeeklyRecitation = WeeklyRecitationCB.Checked;
+            LoadedClassData.WeeklyRecitationCount = (int) WeeklyRecitationCT.Value;
+            LoadedClassData.WeeklyCustom = WeeklyCustomCB.Checked;
+            LoadedClassData.WeeklyCustomCount = (int) WeeklyCustomCT.Value;
+            LoadedClassData.WeeklyCustomText = WeeklyCustomTB.Text;
+            LoadedClassData.FirstPresentation = FirstPresentationCB.Checked;
+            LoadedClassData.FirstPresentationFreeTopic = FirstPresentationFreeTopicCB.Checked;
+            LoadedClassData.FirstPresentationCustomReq = FirstPresentationCustomReqCB.Checked;
+            LoadedClassData.FirstPresentationCustomText = FirstPresentationCustomReqTB.Text;
+            LoadedClassData.SecondPresentation = SecondPresentationCB.Checked;
+            LoadedClassData.SecondPresentationFreeTopic = SecondPresentationFreeTopicCB.Checked;
+            LoadedClassData.SecondPresentationCustomReq = SecondPresentationCustomReqCB.Checked;
+            LoadedClassData.SecondPresentationCustomText = SecondPresentationCustomReqTB.Text;
+            LoadedClassData.EndOfSemesterReviewDays = ReviewCB.Checked;
+            LoadedClassData.ClassTimeString = ClassTimePicker.Value.ToShortTimeString();
         }
-
 
 
         private void GenerateButton_Click(object sender, EventArgs e)
@@ -260,21 +267,24 @@ namespace JLSScheduler
 
         private void GenerateSchedule()
         {
-            var outputBox = string.Empty;
-            var nl = Environment.NewLine + "----------" + Environment.NewLine;
+            string outputBox = string.Empty;
+            string nl = Environment.NewLine + "----------" + Environment.NewLine;
 
             if (DateCheck())
             {
                 outputBox += "Schedule Generation Complete." + Environment.NewLine +
-                             "This is a preview of the class schedule. Please review this to ensure the homework tasks and holiday exceptions are correct." + Environment.NewLine +
+                             "This is a preview of the class schedule. Please review this to ensure the homework tasks and holiday exceptions are correct." +
+                             Environment.NewLine +
                              "Then, press [Export] to generate a folder containing formatted, printable handouts.";
                 outputBox += nl;
                 outputBox += "";
-                outputBox += "NT: " + LoadedClassData.NTname + "   |    KT: " + LoadedClassData.KTname + Environment.NewLine;
-                outputBox += "Semester starts on: " + LoadedClassData.semesterStart.ToLongDateString() + Environment.NewLine;
-                outputBox += "Semester ends on: " + LoadedClassData.semesterEnd.ToLongDateString() + Environment.NewLine;
-                outputBox += "Students: " + LoadedClassData.studentList.Count + Environment.NewLine;
-                foreach (var s in LoadedClassData.studentList)
+                outputBox += "NT: " + LoadedClassData.NTname + "   |    KT: " + LoadedClassData.KTname +
+                             Environment.NewLine;
+                outputBox += "Semester starts on: " + LoadedClassData.SemesterStart.ToLongDateString() +
+                             Environment.NewLine;
+                outputBox += "Semester ends on: " + LoadedClassData.SemesterEnd.ToLongDateString() + Environment.NewLine;
+                outputBox += "Students: " + LoadedClassData.StudentList.Count + Environment.NewLine;
+                foreach (var s in LoadedClassData.StudentList)
                 {
                     if (s.Item2 != null)
                     {
@@ -287,8 +297,8 @@ namespace JLSScheduler
                 }
                 outputBox += nl;
 
-                outputBox = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData).Aggregate(outputBox, (current, s) => current + s + Environment.NewLine);
-
+                outputBox = ScheduleBuilder.BuildPreviewSchedule(LoadedClassData)
+                    .Aggregate(outputBox, (current, s) => current + s + Environment.NewLine);
             }
             SyllabusPreviewBox.Text = outputBox;
         }
@@ -296,7 +306,7 @@ namespace JLSScheduler
         private void AddHomeworkButton_Click(object sender, EventArgs e)
         {
             StoreClassData();
-            using (CustomHomeworkForm chf = new CustomHomeworkForm(this))
+            using (var chf = new CustomHomeworkForm(this))
             {
                 chf.ShowDialog();
             }
@@ -307,7 +317,7 @@ namespace JLSScheduler
             StoreClassData();
             if (DateCheck())
             {
-                using (CustomHolidayForm hf = new CustomHolidayForm(this))
+                using (var hf = new CustomHolidayForm(this))
                 {
                     hf.ShowDialog();
                 }
@@ -316,13 +326,14 @@ namespace JLSScheduler
 
         private bool DateCheck()
         {
-            if (LoadedClassData.semesterStart >= LoadedClassData.semesterEnd)
+            if (LoadedClassData.SemesterStart >= LoadedClassData.SemesterEnd)
             {
-                MessageBox.Show("The semester starting date cannot be the same as, or later than, the semester end date.\n Please fix this before proceeding.",
-                                "ERROR",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Exclamation,
-                                MessageBoxDefaultButton.Button1);
+                MessageBox.Show(
+                    "The semester starting date cannot be the same as, or later than, the semester end date.\n Please fix this before proceeding.",
+                    "ERROR",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
                 return false;
             }
             return true;
@@ -333,7 +344,7 @@ namespace JLSScheduler
             StoreClassData();
             if (DateCheck())
             {
-                using (ExportControls ec = new ExportControls(this))
+                using (var ec = new ExportControls(this))
                 {
                     ec.ShowDialog();
                 }
@@ -349,7 +360,5 @@ namespace JLSScheduler
         {
             Process.Start("http://goo.gl/forms/ZD34SdhlOv");
         }
-
-
     }
 }

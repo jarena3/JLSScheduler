@@ -89,24 +89,6 @@ namespace JLSScheduler.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [
-        ///    &quot;LSA-1&quot;,
-        ///    &quot;LSA-2&quot;,
-        ///    &quot;LSB-1&quot;,
-        ///    &quot;LSB-2&quot;,
-        ///    &quot;LSC-1&quot;,
-        ///    &quot;LSC-2&quot;,
-        ///    &quot;LSD-1&quot;,
-        ///    &quot;LSD-2&quot;
-        ///].
-        /// </summary>
-        public static string ClassLevels {
-            get {
-                return ResourceManager.GetString("ClassLevels", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {
         ///    &quot;7/27/2015&quot;: &quot;JLS Summer Holiday Day 1&quot;,
         ///    &quot;7/28/2015&quot;: &quot;JLS Summer Holiday Day 1&quot;,
@@ -145,43 +127,6 @@ namespace JLSScheduler.Properties {
         public static string KRHolidays {
             get {
                 return ResourceManager.GetString("KRHolidays", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 	[
-        ///        &quot;2:30-3:10&quot;,
-        ///        &quot;3:10-3:50&quot;,
-        ///        &quot;3:55-4:45&quot;,
-        ///        &quot;4:45-5:35&quot;,
-        ///        &quot;5:40-6:30&quot;,
-        ///        &quot;6:30-7:20&quot;,
-        ///        &quot;7:20-7:40&quot;,
-        ///        &quot;7:45-8:35&quot;,
-        ///        &quot;8:35-9:45&quot;
-        ///    ]
-        ///
-        ///.
-        /// </summary>
-        public static string MWFTimes {
-            get {
-                return ResourceManager.GetString("MWFTimes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 	[
-        ///        &quot;3:50-4:40&quot;,
-        ///        &quot;4:40-5:30&quot;,
-        ///        &quot;5:30-6:20&quot;,
-        ///        &quot;6:25-7:15&quot;,
-        ///        &quot;7:15-8:05&quot;,
-        ///        &quot;8:05-9:25&quot;
-        ///    ].
-        /// </summary>
-        public static string TRTimes {
-            get {
-                return ResourceManager.GetString("TRTimes", resourceCulture);
             }
         }
     }

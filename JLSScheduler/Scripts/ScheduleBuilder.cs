@@ -10,24 +10,24 @@ namespace JLSScheduler
 {
     internal static class ScheduleBuilder
     {
-        private static Book[] Books;
+        private static Book[] _books;
         public static Dictionary<DateTime, string> Holidays;
 
         private static DayOfWeek _classWeekday;
         private static string _classTime;
-        private static string _classLevel;
         private static Book _classBook;
 
 
         public static void Init()
         {
             //get books into our array
-            Books = JsonConvert.DeserializeObject<Book[]>(Resources.Books);
+            _books = JsonConvert.DeserializeObject<Book[]>(Resources.Books);
 
             //get the holiday lists into our dictionary
             var stringDKr = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.KRHolidays);
             var stringDJls = JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.JLSHolidays);
-            var stringDict = stringDKr.Concat(stringDJls.Where(kvp => !stringDKr.ContainsKey(kvp.Key)));
+            IEnumerable<KeyValuePair<string, string>> stringDict =
+                stringDKr.Concat(stringDJls.Where(kvp => !stringDKr.ContainsKey(kvp.Key)));
 
             Holidays = new Dictionary<DateTime, string>();
 
@@ -48,14 +48,13 @@ namespace JLSScheduler
             var classWeeks = new List<Week>();
 
             //collect form data for class information
-            _classWeekday = GetWeekday(cd.classDayIndex);
-            _classLevel = cd.classLevel;
-            _classBook = Books.Single(s => s.Title == _classLevel);
-            _classTime = cd.classTimeString;
+            _classWeekday = GetWeekday(cd.ClassDayIndex);
+            _classBook = _books.First(s => s.Title == cd.ClassLevel);
+            _classTime = cd.ClassTimeString;
 
             //first, get a list of all days between our range
-            List<DateTime> rawdays = Enumerable.Range(0, 1 + cd.semesterEnd.Subtract(cd.semesterStart).Days)
-                .Select(offset => cd.semesterStart.AddDays(offset))
+            List<DateTime> rawdays = Enumerable.Range(0, 1 + cd.SemesterEnd.Subtract(cd.SemesterStart).Days)
+                .Select(offset => cd.SemesterStart.AddDays(offset))
                 .ToList();
 
             //discard anything that isn't the right weekday.
@@ -75,17 +74,17 @@ namespace JLSScheduler
                     }
                 }
 
-                foreach (DateTime cDt in cd.customHolidaysList.Keys)
+                foreach (DateTime cDt in cd.CustomHolidaysList.Keys)
                 {
                     if (cDt.Date == d.Date)
                     {
-                        classWeeks.Add(new Week(d, cd.customHolidaysList[cDt]));
+                        classWeeks.Add(new Week(d, cd.CustomHolidaysList[cDt]));
                         Debug.WriteLine("custom holiday added");
                     }
                 }
 
                 //add working class weeks
-                classWeeks.Add(new Week(classIterator, d, _classBook));
+                classWeeks.Add(new Week(classIterator, d));
                 classIterator++;
             }
 
@@ -121,37 +120,37 @@ namespace JLSScheduler
                             _classBook.Units[chapterIterator.ToString(CultureInfo.InvariantCulture)]);
 
                         //check for first presentation (no overlap in ST chapters)
-                        if (w.WeekNumber == 4 && cd.firstPresentation)
+                        if (w.WeekNumber == 4 && cd.FirstPresentation)
                         {
                             w.Title = string.Format("{0}, {1} - Presentation #1", w.Date, _classTime);
                             w.Subtitle = "Speaking Tree Topic Presentation";
-                            if (cd.firstPresentationFreeTopic)
+                            if (cd.FirstPresentationFreeTopic)
                             {
                                 w.Subtitle = "Free Topic Presentation";
                             }
-                            if (cd.firstPresentationCustomReq)
+                            if (cd.FirstPresentationCustomReq)
                             {
-                                w.Subtitle += " " + cd.firstPresentationCustomText;
+                                w.Subtitle += " " + cd.FirstPresentationCustomText;
                             }
                         }
                         //likewise, check for second presentation
-                        if (w.WeekNumber == 8 && cd.secondPresentation)
+                        if (w.WeekNumber == 8 && cd.SecondPresentation)
                         {
                             w.Title = string.Format("{0}, {1} - Presentation #2", w.Date, _classTime);
                             w.Subtitle = "Speaking Tree Topic Presentation";
-                            if (cd.secondPresentationFreeTopic)
+                            if (cd.SecondPresentationFreeTopic)
                             {
                                 w.Subtitle = "Free Topic Presentation";
                             }
-                            if (cd.secondPresentationCustomReq)
+                            if (cd.SecondPresentationCustomReq)
                             {
-                                w.Subtitle += " " + cd.secondPresentationCustomText;
+                                w.Subtitle += " " + cd.SecondPresentationCustomText;
                             }
                         }
 
                         //now, we have to make sure presentation homework overrides automated homework additions
                         //these are presentation weeks -1, because we're dealing in due dates now
-                        if (w.WeekNumber == 3 && cd.firstPresentation)
+                        if (w.WeekNumber == 3 && cd.FirstPresentation)
                         {
                             w.Title = string.Format("{0}, {1}", w.Date, _classTime);
                             w.Subtitle = string.Format("Unit {0} : {1}", chapterIterator,
@@ -160,7 +159,7 @@ namespace JLSScheduler
                             w.AddHomework(new HomeworkTask("Prepare Presentation #1", "", 3));
                         }
                             //likewise, check for second presentation
-                        else if (w.WeekNumber == 7 && cd.secondPresentation)
+                        else if (w.WeekNumber == 7 && cd.SecondPresentation)
                         {
                             w.Title = string.Format("{0}, {1}", w.Date, _classTime);
                             w.Subtitle = string.Format("Unit {0} : {1}", chapterIterator,
@@ -175,44 +174,44 @@ namespace JLSScheduler
                             if (chapterIterator + 1 < 9)
                             {
                                 //add weekly homework, if it exists
-                                if (cd.weeklyReading)
+                                if (cd.WeeklyReading)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Reading",
                                         string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
                                             chapterIterator + 1,
                                             _classBook.Units[
                                                 (chapterIterator + 1).ToString(CultureInfo.InvariantCulture)],
-                                            cd.weeklyReadingCount),
+                                            cd.WeeklyReadingCount),
                                         w.WeekNumber));
                                 }
 
-                                if (cd.weeklyListening)
+                                if (cd.WeeklyListening)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Listening",
                                         string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
                                             chapterIterator + 1,
                                             _classBook.Units[
                                                 (chapterIterator + 1).ToString(CultureInfo.InvariantCulture)],
-                                            cd.weeklyListeningCount),
+                                            cd.WeeklyListeningCount),
                                         w.WeekNumber));
                                 }
 
-                                if (cd.weeklyRecitation)
+                                if (cd.WeeklyRecitation)
                                 {
                                     w.AddHomework(new HomeworkTask("Weekly Speaking",
                                         string.Format("Speaking Tree Chapter {0}: {1}, {2} time(s)",
                                             chapterIterator + 1,
                                             _classBook.Units[
                                                 (chapterIterator + 1).ToString(CultureInfo.InvariantCulture)],
-                                            cd.weeklyRecitationCount),
+                                            cd.WeeklyRecitationCount),
                                         w.WeekNumber));
                                 }
 
-                                if (cd.weeklyCustom)
+                                if (cd.WeeklyCustom)
                                 {
                                     w.AddHomework(
                                         new HomeworkTask(
-                                            string.Format("{0}, {1} times", cd.weeklyCustomText, cd.weeklyCustomCount),
+                                            string.Format("{0}, {1} times", cd.WeeklyCustomText, cd.WeeklyCustomCount),
                                             string.Empty, w.WeekNumber));
                                 }
                             }
@@ -224,7 +223,7 @@ namespace JLSScheduler
                     else
                     {
                         w.Title = string.Format("{0}, {1}", w.Date, _classTime);
-                        if (cd.endOfSemesterReviewDays)
+                        if (cd.EndOfSemesterReviewDays)
                         {
                             w.Subtitle = "Review Day";
                         }
@@ -234,9 +233,9 @@ namespace JLSScheduler
 
             //check the custom homework list, and add any applicable ones to the homework list
             var customHomeworkAdds = new List<HomeworkTask>();
-            int semesterLength = (((cd.semesterEnd - cd.semesterStart).Days)/7) + 1;
+            int semesterLength = (((cd.SemesterEnd - cd.SemesterStart).Days)/7) + 1;
             Debug.WriteLine("semester length:" + semesterLength);
-            foreach (HomeworkTask hwt in cd.customHomeworkList)
+            foreach (HomeworkTask hwt in cd.CustomHomeworkList)
             {
                 if (hwt.Repeats)
                 {
@@ -254,7 +253,8 @@ namespace JLSScheduler
 
             foreach (HomeworkTask hw in customHomeworkAdds)
             {
-                foreach (Week wk in weeks.Where(wk => hw.DueWeek == wk.WeekNumber))
+                HomeworkTask tHw = hw;
+                foreach (Week wk in weeks.Where(wk => tHw.DueWeek == wk.WeekNumber))
                 {
                     wk.AddHomework(hw);
                 }

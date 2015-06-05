@@ -20,10 +20,10 @@ namespace JLSScheduler.Forms
 
         private void Init()
         {
-            Calendar.MinDate = _main.LoadedClassData.semesterStart;
-            Calendar.MaxDate = _main.LoadedClassData.semesterEnd;
+            Calendar.MinDate = _main.LoadedClassData.SemesterStart;
+            Calendar.MaxDate = _main.LoadedClassData.SemesterEnd;
 
-            _customHolidays = _main.LoadedClassData.customHolidaysList;
+            _customHolidays = _main.LoadedClassData.CustomHolidaysList;
 
             _allHolidays = new List<DateTime>();
             var holidays = new List<string>();
@@ -82,7 +82,7 @@ namespace JLSScheduler.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _main.LoadedClassData.customHolidaysList = _customHolidays;
+            _main.LoadedClassData.CustomHolidaysList = _customHolidays;
             Close();
         }
     }

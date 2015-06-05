@@ -716,10 +716,6 @@
             // 
             this.ClassLevelComboBox.FormattingEnabled = true;
             this.ClassLevelComboBox.Items.AddRange(new object[] {
-            "DSC-1",
-            "DSC-2",
-            "DSD-1",
-            "DSD-2",
             "LSA-1",
             "LSA-2",
             "LSB-1",
@@ -727,8 +723,7 @@
             "LSC-1",
             "LSC-2",
             "LSD-1",
-            "LSD-2",
-            "OTHER"});
+            "LSD-2"});
             this.ClassLevelComboBox.Location = new System.Drawing.Point(79, 279);
             this.ClassLevelComboBox.Name = "ClassLevelComboBox";
             this.ClassLevelComboBox.Size = new System.Drawing.Size(128, 21);

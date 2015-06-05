@@ -2,28 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace JLSScheduler
 {
     /// <summary>
-    /// This holds the week data for the class, as a collection item for the schedule
-    /// Its Print function produces output appropriate for the passed format
+    ///     This holds the week data for the class, as a collection item for the schedule
+    ///     Its Print function produces output appropriate for the passed format
     /// </summary>
-    class Week
+    internal class Week
     {
+        private readonly string _holidayName;
+        private readonly int _weekNumber;
+        public DateTime DateTime;
+        public List<HomeworkTask> HomeworkList;
+        public bool IsHoliday;
+
+        public string Subtitle;
+        public string Title;
+
         /// <summary>
-        /// Not a holiday. Not a presentation week.
+        ///     Not a holiday. Not a presentation week.
         /// </summary>
-        public Week(int weekNumber, DateTime date, Book LSBook)
+        public Week(int weekNumber, DateTime date)
         {
-            this.HomeworkList = new List<HomeworkTask>();
-            this.DateTime = date;
-            this._book = LSBook;
-            this._weekNumber = weekNumber;
+            HomeworkList = new List<HomeworkTask>();
+            DateTime = date;
+            _weekNumber = weekNumber;
         }
 
         /// <summary>
-        /// A holiday
+        ///     A holiday
         /// </summary>
         public Week(DateTime date, string holidayName)
         {
@@ -31,35 +38,17 @@ namespace JLSScheduler
             HomeworkList = new List<HomeworkTask>();
             IsHoliday = true;
             _holidayName = holidayName;
-
         }
 
-        /// <summary>
-        /// A presentation week
-        /// </summary>
-        public Week(DateTime date, bool firstPresentation)
+        public int WeekNumber
         {
-            DateTime = date;
-            HomeworkList = new List<HomeworkTask>();
-            PresentationNumber = firstPresentation ? 1 : 2;
-
+            get { return _weekNumber; }
         }
-          
-        public DateTime DateTime;
-        private Book _book;
-        public bool IsHoliday;
 
-        public int PresentationNumber;
-
-        public int WeekNumber { get { return _weekNumber; } }
-
-        public List<HomeworkTask> HomeworkList;
-        private int _weekNumber;
-        private string _lsClass;
-
-        public string Date { get { return DateTime.ToString("D"); } }
-
-        private string _holidayName;
+        public string Date
+        {
+            get { return DateTime.ToString("D"); }
+        }
 
         public string HolidayTitle
         {
@@ -74,10 +63,6 @@ namespace JLSScheduler
             }
         }
 
-        public string Title;
-
-        public string Subtitle;
-
         public void AddHomework(HomeworkTask homeworkItem)
         {
             HomeworkList.Add(homeworkItem);
@@ -86,8 +71,8 @@ namespace JLSScheduler
         public override string ToString()
         {
             string output = Title + Environment.NewLine + Subtitle + Environment.NewLine;
-            return HomeworkList.Aggregate(output, (current, hw) => current + (hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine));
-
+            return HomeworkList.Aggregate(output,
+                (current, hw) => current + (hw.Title + Environment.NewLine + "  - " + hw.Body + Environment.NewLine));
         }
     }
 }

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Word;
 
@@ -17,13 +11,13 @@ namespace JLSScheduler.Forms
     public partial class ExportControls : Form
     {
 
-        private enum saveType
+        private enum SaveType
         {
-            DOC,
-            PDF,
-            HTML,
-            XPS,
-            ODT
+            Doc,
+            Pdf,
+            Html,
+            Xps,
+            Odt
         }
 
 
@@ -60,34 +54,34 @@ namespace JLSScheduler.Forms
 
         private void DOCBTN_Click(object sender, EventArgs e)
         {
-            WinwordSaveAs(saveType.DOC);
+            WinwordSaveAs(SaveType.Doc);
         }
         private void HTMLBTN_Click(object sender, EventArgs e)
         {
-            WinwordSaveAs(saveType.HTML);
+            WinwordSaveAs(SaveType.Html);
         }
 
         private void PDFBTN_Click(object sender, EventArgs e)
         {
-            WinwordSaveAs(saveType.PDF);
+            WinwordSaveAs(SaveType.Pdf);
         }
         private void XPSBTN_Click(object sender, EventArgs e)
         {
-            WinwordSaveAs(saveType.XPS);
+            WinwordSaveAs(SaveType.Xps);
         }
         private void ODTBTN_Click(object sender, EventArgs e)
         {
-            WinwordSaveAs(saveType.ODT);
+            WinwordSaveAs(SaveType.Odt);
         }
 
-        private void WinwordSaveAs(saveType sType)
+        private void WinwordSaveAs(SaveType sType)
         {
             using (var dialog = new FolderBrowserDialog())
             {
                 if (dialog.ShowDialog() != DialogResult.OK) return;
 
-                var classDayString = ScheduleBuilder.GetWeekday(_main.LoadedClassData.classDayIndex).ToString();
-                var _classTimeString = _main.LoadedClassData.classTimeString;
+                var classDayString = ScheduleBuilder.GetWeekday(_main.LoadedClassData.ClassDayIndex).ToString();
+                var _classTimeString = _main.LoadedClassData.ClassTimeString;
 
                 var classTimeString = new string((from c in _classTimeString
                     where char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)
@@ -138,7 +132,7 @@ namespace JLSScheduler.Forms
                         object filename = string.Empty;
                         switch (sType)
                         {
-                            case saveType.DOC:
+                            case SaveType.Doc:
                                 filename = dir.FullName + "/" + rawFilename + ".doc";
                                 string v = winword.Version;
                                 
@@ -157,35 +151,32 @@ namespace JLSScheduler.Forms
                                     case "14.0":
                                         document.SaveAs2(ref filename);
                                         break;
-                                        
-                                    default:
-                                        break;
                                 }
 
                                 document.Close(ref missing, ref missing, ref missing);
                                 document = null;
                                 break;
-                            case saveType.PDF:
+                            case SaveType.Pdf:
                                 var pdffilename = dir.FullName + "/" + rawFilename + ".pdf";
                                 document.ExportAsFixedFormat(pdffilename, WdExportFormat.wdExportFormatPDF);
                                 document.Close(ref missing, ref missing, ref missing);
                                 document = null;
                                 break;
-                            case saveType.HTML:
+                            case SaveType.Html:
                                 filename = dir.FullName + "/" + rawFilename + ".html";
                                 object fileformat = WdSaveFormat.wdFormatHTML;
                                 document.SaveAs2(ref filename, ref fileformat);
                                 document.Close(ref missing, ref missing, ref missing);
                                 document = null;
                                 break;
-                            case saveType.ODT:
+                            case SaveType.Odt:
                                 filename = dir.FullName + "/" + rawFilename + ".odt";
                                 object fileformat2 = WdSaveFormat.wdFormatOpenDocumentText;
                                 document.SaveAs2(ref filename, ref fileformat2);
                                 document.Close(ref missing, ref missing, ref missing);
                                 document = null;
                                 break;
-                            case saveType.XPS:
+                            case SaveType.Xps:
                                 var xpsfilename = dir.FullName + "/" + rawFilename + ".xps";
                                 document.ExportAsFixedFormat(xpsfilename, WdExportFormat.wdExportFormatXPS);
                                 document.Close(ref missing, ref missing, ref missing);

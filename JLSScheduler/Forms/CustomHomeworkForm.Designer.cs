@@ -43,6 +43,7 @@
             this.WeekNumberCT = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.SaveBtn = new System.Windows.Forms.Button();
+            this.AddEmptyBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.RepeatsCT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WeekNumberCT)).BeginInit();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             // 
             // DeleteBTN
             // 
-            this.DeleteBTN.Location = new System.Drawing.Point(449, 54);
+            this.DeleteBTN.Location = new System.Drawing.Point(449, 83);
             this.DeleteBTN.Name = "DeleteBTN";
             this.DeleteBTN.Size = new System.Drawing.Size(75, 23);
             this.DeleteBTN.TabIndex = 2;
@@ -199,11 +200,22 @@
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
+            // AddEmptyBTN
+            // 
+            this.AddEmptyBTN.Location = new System.Drawing.Point(449, 54);
+            this.AddEmptyBTN.Name = "AddEmptyBTN";
+            this.AddEmptyBTN.Size = new System.Drawing.Size(75, 23);
+            this.AddEmptyBTN.TabIndex = 16;
+            this.AddEmptyBTN.Text = "Add Empty";
+            this.AddEmptyBTN.UseVisualStyleBackColor = true;
+            this.AddEmptyBTN.Click += new System.EventHandler(this.AddEmptyBTN_Click);
+            // 
             // CustomHomeworkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 310);
+            this.Controls.Add(this.AddEmptyBTN);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.WeekNumberCT);
@@ -247,5 +259,6 @@
         private System.Windows.Forms.NumericUpDown WeekNumberCT;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Button AddEmptyBTN;
     }
 }

@@ -1,53 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JLSScheduler.Forms
 {
     public partial class CustomHomeworkForm : Form
     {
-        private List<HomeworkTask> tasks;
-        private Main _main;
-        private int taskIterator;
+        private readonly Main _main;
+        private readonly List<HomeworkTask> _tasks;
+        private int _taskIterator;
 
         public CustomHomeworkForm(Main mainForm)
         {
             InitializeComponent();
             _main = mainForm;
-            tasks = mainForm.LoadedClassData.customHomeworkList;
+            _tasks = mainForm.LoadedClassData.CustomHomeworkList;
             RefreshTasksList();
         }
 
         private void OkBTN_Click(object sender, EventArgs e)
         {
-            _main.LoadedClassData.customHomeworkList = tasks;
-            this.Close();
+            _main.LoadedClassData.CustomHomeworkList = _tasks;
+            Close();
         }
 
-        void RefreshTasksList()
+        private void RefreshTasksList()
         {
             TasksList.Items.Clear();
-            TasksList.Items.AddRange(tasks.Select(s => s.ToString()).ToArray());
+            TasksList.Items.AddRange(_tasks.Select(s => s.ToString()).ToArray());
         }
 
         private void TasksList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            taskIterator = TasksList.SelectedIndex;
-            if (taskIterator > -1)
+            _taskIterator = TasksList.SelectedIndex;
+            if (_taskIterator > -1)
             {
                 SaveBtn.Enabled = true;
 
-                TitleTB.Text = tasks[taskIterator].Title;
-                DescriptionTB.Text = tasks[taskIterator].Body;
-                WeekNumberCT.Value = tasks[taskIterator].DueWeek;
-                RepeatsCB.Checked = tasks[taskIterator].Repeats;
-                RepeatsCT.Value = tasks[taskIterator].RepeatEvery;
+                TitleTB.Text = _tasks[_taskIterator].Title;
+                DescriptionTB.Text = _tasks[_taskIterator].Body;
+                WeekNumberCT.Value = _tasks[_taskIterator].DueWeek;
+                RepeatsCB.Checked = _tasks[_taskIterator].Repeats;
+                RepeatsCT.Value = _tasks[_taskIterator].RepeatEvery;
             }
             else
             {
@@ -57,7 +53,35 @@ namespace JLSScheduler.Forms
 
         private void AddNewBTN_Click(object sender, EventArgs e)
         {
-            tasks.Add(new HomeworkTask("New Homework Task", string.Empty, 1));
+            var newTask = new HomeworkTask("New Homework Task", string.Empty, 1);
+            if (!string.IsNullOrEmpty(TitleTB.Text))
+            {
+                newTask.Title = TitleTB.Text;
+            }
+            if (!string.IsNullOrEmpty(DescriptionTB.Text))
+            {
+                newTask.Body = DescriptionTB.Text;
+            }
+            if (WeekNumberCT.Value != 1)
+            {
+                newTask.DueWeek = (int) WeekNumberCT.Value;
+            }
+            if (RepeatsCB.Checked)
+            {
+                newTask.Repeats = true;
+                newTask.RepeatEvery = (int) RepeatsCT.Value;
+            }
+
+            _tasks.Add(newTask);
+            TextBoxesClear();
+            RefreshTasksList();
+        }
+
+        private void AddEmptyBTN_Click(object sender, EventArgs e)
+        {
+            var newTask = new HomeworkTask("New Homework Task", string.Empty, 1);
+
+            _tasks.Add(newTask);
             TextBoxesClear();
             RefreshTasksList();
         }
@@ -73,25 +97,18 @@ namespace JLSScheduler.Forms
 
         private void RepeatsCB_CheckedChanged(object sender, EventArgs e)
         {
-            if (RepeatsCB.Checked == false)
-            {
-                RepeatsCB.ForeColor = Color.DarkGray;
-            }
-            else
-            {
-                RepeatsCB.ForeColor = Color.Black;
-            }
+            RepeatsCB.ForeColor = RepeatsCB.Checked == false ? Color.DarkGray : Color.Black;
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            if (taskIterator > -1 && TasksList.Items.Count > 0)
+            if (_taskIterator > -1 && TasksList.Items.Count > 0)
             {
-                tasks[taskIterator].Title = TitleTB.Text;
-                tasks[taskIterator].Body = DescriptionTB.Text;
-                tasks[taskIterator].DueWeek = (int) WeekNumberCT.Value;
-                tasks[taskIterator].Repeats = RepeatsCB.Checked;
-                tasks[taskIterator].RepeatEvery = (int) RepeatsCT.Value;
+                _tasks[_taskIterator].Title = TitleTB.Text;
+                _tasks[_taskIterator].Body = DescriptionTB.Text;
+                _tasks[_taskIterator].DueWeek = (int) WeekNumberCT.Value;
+                _tasks[_taskIterator].Repeats = RepeatsCB.Checked;
+                _tasks[_taskIterator].RepeatEvery = (int) RepeatsCT.Value;
             }
 
             RefreshTasksList();
@@ -101,7 +118,7 @@ namespace JLSScheduler.Forms
         {
             if (TasksList.SelectedIndex > -1)
             {
-                tasks.RemoveAt(TasksList.SelectedIndex);
+                _tasks.RemoveAt(TasksList.SelectedIndex);
                 TextBoxesClear();
             }
             RefreshTasksList();
@@ -110,7 +127,6 @@ namespace JLSScheduler.Forms
                 SaveBtn.Enabled = false;
             }
         }
-
 
     }
 }

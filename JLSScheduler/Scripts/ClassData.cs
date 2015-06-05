@@ -9,52 +9,52 @@ namespace JLSScheduler
         public string NTname;
         public string KTname;
 
-        public List<Tuple<string, string>> studentList;
+        public List<Tuple<string, string>> StudentList;
 
-        public string classLevel;
-        public int classLevelIndex;
-        public int classDayIndex;
-        public DateTime classTime;
+        public string ClassLevel;
+        public int ClassLevelIndex;
+        public int ClassDayIndex;
+        public DateTime ClassTime;
 
-        public DateTime semesterStart;
-        public DateTime semesterEnd;
+        public DateTime SemesterStart;
+        public DateTime SemesterEnd;
 
-        public bool ignoreKoreanHolidays;
-        public bool ignoreJLSHolidays;
+        public bool IgnoreKoreanHolidays;
+        public bool IgnoreJlsHolidays;
 
-        public bool weeklyReading;
-        public int weeklyReadingCount = 1;
-        public bool weeklyListening;
-        public int weeklyListeningCount = 1;
-        public bool weeklyRecitation;
-        public int weeklyRecitationCount = 1;
-        public bool weeklyCustom;
-        public int weeklyCustomCount = 1;
-        public string weeklyCustomText;
+        public bool WeeklyReading;
+        public int WeeklyReadingCount = 1;
+        public bool WeeklyListening;
+        public int WeeklyListeningCount = 1;
+        public bool WeeklyRecitation;
+        public int WeeklyRecitationCount = 1;
+        public bool WeeklyCustom;
+        public int WeeklyCustomCount = 1;
+        public string WeeklyCustomText;
 
-        public bool firstPresentation;
-        public bool firstPresentationFreeTopic;
-        public bool firstPresentationCustomReq;
-        public string firstPresentationCustomText;
+        public bool FirstPresentation;
+        public bool FirstPresentationFreeTopic;
+        public bool FirstPresentationCustomReq;
+        public string FirstPresentationCustomText;
 
-        public bool secondPresentation;
-        public bool secondPresentationFreeTopic;
-        public bool secondPresentationCustomReq;
-        public string secondPresentationCustomText;
+        public bool SecondPresentation;
+        public bool SecondPresentationFreeTopic;
+        public bool SecondPresentationCustomReq;
+        public string SecondPresentationCustomText;
 
-        public bool endOfSemesterReviewDays;
+        public bool EndOfSemesterReviewDays;
 
-        public List<HomeworkTask> customHomeworkList;
-        public Dictionary<DateTime, string> customHolidaysList;
-        public string classTimeString;
+        public List<HomeworkTask> CustomHomeworkList;
+        public Dictionary<DateTime, string> CustomHolidaysList;
+        public string ClassTimeString;
 
         public ClassData()
         {
-            studentList = new List<Tuple<string, string>>();
-            customHomeworkList = new List<HomeworkTask>();
-            customHolidaysList = new Dictionary<DateTime, string>();
-            semesterStart = DateTime.Now;
-            semesterEnd = DateTime.Now.AddDays(1);
+            StudentList = new List<Tuple<string, string>>();
+            CustomHomeworkList = new List<HomeworkTask>();
+            CustomHolidaysList = new Dictionary<DateTime, string>();
+            SemesterStart = DateTime.Now;
+            SemesterEnd = DateTime.Now.AddDays(1);
         }
 
     }
